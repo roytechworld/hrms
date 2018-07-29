@@ -1,10 +1,13 @@
 package com.pts.procureline.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.LogicalExpression;
@@ -157,9 +160,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	@SuppressWarnings("unchecked")
 	public  List<T> getAnyDataGenericType(Class<? extends T> typelass) {
 		List<T> slist=new ArrayList<T>();
-		
-		
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction().begin();
 		try
@@ -188,6 +189,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	@Override
 	public List<T> retreiveAnydataWithonePARA(String fieldname ,String fieldvalue ,final Class<? extends T> typelass)
 	{
     List<T> slist=new ArrayList<T>();
@@ -216,5 +218,129 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		
 		return slist;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public List<T> retreiveAnydataWithonePARA_NotEqual_Mode(String fieldname ,String fieldvalue ,final Class<? extends T> typelass)
+	{
+    List<T> slist=new ArrayList<T>();
+	
+		Session session = sessionFactory.openSession();
+		session.beginTransaction().begin();
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.ne(fieldname,fieldvalue));
+			slist  =cr.list();
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+		finally
+		{
+			
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+		}
+		
+		return slist;
+	}
+	@Override
+	@Transactional
+	public String getAnyDataBasedOnOnePara(String fieldname ,String fieldvalue ,final Class<? extends T> typelass)
+	{
+		String val="";
+		Session session = sessionFactory.openSession();
+		session.beginTransaction().begin();
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			List<T> list = (List<T>)cr.list();
+			
+		  val=	list.get(0).toString();
+			
+			
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+		finally
+		{
+			
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+		}
+		return val;
+	}
+
+	public List<T> retreiveAnydataWithonePARAAnytype(String fieldname ,Object fieldvalue ,final Class<? extends T> typelass)
+	{
+    List<T> slist=new ArrayList<T>();
+	
+		Session session = sessionFactory.openSession();
+		session.beginTransaction().begin();
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			slist  =cr.list();
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+		finally
+		{
+			
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+		}
+		
+		return slist;
+	}
+	@Override
+	public List<Object> retreiveAnydataWithJoining(String querys,String para)
+	{
+    List<Object> slist=new ArrayList<Object>();
+	
+		Session session = sessionFactory.openSession();
+		session.beginTransaction().begin();
+		try
+		{
+			String hql = "SELECT C.*, S.*,e.* FROM vms_project_timesheet_period C, vms_project_master S, vms_employee_master e WHERE  e.`employee_id`=C.`employee_id` AND C.status='0'";
+			Query query = session.createSQLQuery(hql);
+			 slist=query.list();
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+		finally
+		{
+			
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+		}
+		
+		return slist;
+	}
+	
+	
 
 }

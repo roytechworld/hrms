@@ -2,6 +2,9 @@ package com.pts.procureline.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 
@@ -9,15 +12,17 @@ import java.util.Date;
  * The persistent class for the vms_project_timesheet_period database table.
  * 
  */
+@Component
 @Entity
 @Table(name="vms_project_timesheet_period")
 @NamedQuery(name="VmsProjectTimesheetPeriod.findAll", query="SELECT v FROM VmsProjectTimesheetPeriod v")
+@Access( AccessType.FIELD )
 public class VmsProjectTimesheetPeriod implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Lob
 	@Column(name="admin_comment")
@@ -46,22 +51,31 @@ public class VmsProjectTimesheetPeriod implements Serializable {
 	@Lob
 	@Column(name="sadmin_comment")
 	private String sadminComment;
-
+	
+	@Column(name="status")
 	private String status;
 
 	@Column(name="timesheet_id")
 	private String timesheetId;
 
+	
+	
 	public VmsProjectTimesheetPeriod() {
 	}
 
-	public int getId() {
-		return this.id;
+
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setId(int id) {
+
+
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public String getAdminComment() {
 		return this.adminComment;
@@ -151,4 +165,9 @@ public class VmsProjectTimesheetPeriod implements Serializable {
 		this.timesheetId = timesheetId;
 	}
 
+	
+
+	
+	
+	
 }

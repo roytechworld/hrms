@@ -1,5 +1,6 @@
 package com.pts.procureline.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,8 @@ import com.pts.procureline.model.Consultant;
 import com.pts.procureline.model.SuperAdmin;
 import com.pts.procureline.model.Vendor;
 import com.pts.procureline.model.VmsEmployeeMaster;
+import com.pts.procureline.model.VmsProjectMaster;
+import com.pts.procureline.model.VmsProjectTimesheetPeriod;
 import com.pts.procureline.service.AdminService;
 import com.pts.procureline.service.GenericService;
 import com.pts.procureline.service.SadminService;
@@ -34,7 +37,7 @@ import com.pts.util.OTPGenerateEngine;
 @Controller
 @SessionAttributes("SuperAdmin")
 public class SadminController<T> extends DBConstant {
-
+	private static final Logger logger = LoggerFactory.getLogger(SadminController.class);
 	@ModelAttribute
 	public SuperAdmin getSuperAdminDetails()
 	{
@@ -45,7 +48,9 @@ public class SadminController<T> extends DBConstant {
 	   {
 	      return new SuperAdmin();
 	   }
-	
+	@Autowired
+	List<VmsProjectTimesheetPeriod>   timesheetlist;
+	   
 	@Autowired
 	SadminService addDataService;
 	SuperAdmin sobj;
@@ -71,7 +76,23 @@ public class SadminController<T> extends DBConstant {
 	@Autowired
 	GenericService<VmsEmployeeMaster>employeeservicegeneric;
 	
-	private static final Logger logger = LoggerFactory.getLogger(SadminController.class);
+	@Autowired
+	GenericService<VmsProjectTimesheetPeriod>timesheetservice;
+	
+	@Autowired
+	List<ProjectDto> projectdtolist;
+	
+	@Autowired
+	VmsProjectMaster projectmaster;
+	
+	@Autowired
+	GenericService<VmsProjectMaster> projectservice;
+	
+	@Autowired
+	GenericService<Object> objectlist;
+	
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	
 	
 	//[Registration page code:]-------------------------------------------------------------------------------
@@ -187,6 +208,40 @@ public class SadminController<T> extends DBConstant {
 				mav.addObject("vendorcount", vendorservicegeneric.getAnyDataGenericType(Vendor.class).size());
 				mav.addObject("consultantcount", consultantservicegeneric.getAnyDataGenericType(Consultant.class).size());
 				mav.addObject("employeecount", employeeservicegeneric.getAnyDataGenericType(VmsEmployeeMaster.class).size());
+				System.out.println(timesheetservice.retreiveAnydataWithonePARA_NotEqual_Mode("status", "1", VmsProjectTimesheetPeriod.class).size());
+				
+				
+				
+				
+				List<Object> list=objectlist.retreiveAnydataWithJoining("", "");
+				
+				Iterator<Object> itr=list.iterator();
+				while (itr.hasNext()) 
+				{
+					ProjectDto dto=new ProjectDto();
+				    Object rows[] = (Object[])itr.next();
+					
+					String n=rows[8].toString();
+					System.out.println(n);
+					
+				}
+			
+				
+				/*
+				
+				for(VmsProjectTimesheetPeriod listt:timesheetservice.retreiveAnydataWithonePARA_NotEqual_Mode("status", "1", VmsProjectTimesheetPeriod.class))
+				{
+					ProjectDto ad=new ProjectDto();
+					ad.setTimesheetid(listt.getTimesheetId());
+				
+					ad.setProjectcode(projectservice.retreiveAnydataWithonePARAAnytype("id", listt.getProjectId(), VmsProjectMaster.class).get(0).getProjectCode());
+					
+					projectdtolist.add(ad);
+				
+					
+				}
+				*/
+			
 				
 				mav.setViewName(redirectpage="dashboard");
 			}
