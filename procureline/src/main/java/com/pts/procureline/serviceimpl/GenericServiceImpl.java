@@ -154,6 +154,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		return i;
 	}
 
+	@SuppressWarnings("unchecked")
 	public  List<T> getAnyDataGenericType(Class<? extends T> typelass) {
 		List<T> slist=new ArrayList<T>();
 		

@@ -27,7 +27,7 @@
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 			<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-			<beans:property name="url" value="jdbc:mysql://procurenodejs.mysql.database.azure.com/staging" />
+			<beans:property name="url" value="jdbc:mysql://procurenodejs.mysql.database.azure.com/staging?zeroDateTimeBehavior=convertToNull" />
 			<beans:property name="username" value="nodejsapp@procurenodejs" />
 			<beans:property name="password" value="Suite1702" />
 	</beans:bean>
@@ -41,7 +41,7 @@
 					<beans:value>com.pts.procureline.model.SuperAdmin</beans:value>
 					<beans:value>com.pts.procureline.model.Admin</beans:value>
 					<beans:value>com.pts.procureline.model.Vendor</beans:value>
-					<beans:value>com.pts.procureline.model.Employee</beans:value>
+					<beans:value>com.pts.procureline.model.VmsEmployeeMaster</beans:value>
 					<beans:value>com.pts.procureline.model.Consultant</beans:value>
 		
 				</beans:list>

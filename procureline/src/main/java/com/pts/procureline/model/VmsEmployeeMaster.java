@@ -33,9 +33,8 @@ public class VmsEmployeeMaster implements Serializable {
 	@Column(name="client_id")
 	private int clientId;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="date_of_joining")
-	private Date dateOfJoining;
+	private String dateOfJoining;
 
 	@Column(name="emp_bill_rate_type")
 	private String empBillRateType;
@@ -71,9 +70,9 @@ public class VmsEmployeeMaster implements Serializable {
 
 	private String employeeName;
 
-	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name="entry_date")
-	private Date entryDate;
+	private String entryDate;
 
 	@Column(name="fax_no")
 	private int faxNo;
@@ -109,9 +108,9 @@ public class VmsEmployeeMaster implements Serializable {
 
 	private String status;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	@Column(name="updated_date")
-	private Date updatedDate;
+	private String updatedDate;
 
 	@Column(name="v_employee_bill_rate")
 	private String vEmployeeBillRate;
@@ -159,13 +158,7 @@ public class VmsEmployeeMaster implements Serializable {
 		this.clientId = clientId;
 	}
 
-	public Date getDateOfJoining() {
-		return this.dateOfJoining;
-	}
 
-	public void setDateOfJoining(Date dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
-	}
 
 	public String getEmpBillRateType() {
 		return this.empBillRateType;
@@ -273,13 +266,7 @@ public class VmsEmployeeMaster implements Serializable {
 		this.employeeName = employeeName;
 	}
 
-	public Date getEntryDate() {
-		return this.entryDate;
-	}
 
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = entryDate;
-	}
 
 	public int getFaxNo() {
 		return this.faxNo;
@@ -377,13 +364,7 @@ public class VmsEmployeeMaster implements Serializable {
 		this.status = status;
 	}
 
-	public Date getUpdatedDate() {
-		return this.updatedDate;
-	}
 
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 
 	public String getVEmployeeBillRate() {
 		return this.vEmployeeBillRate;
@@ -407,6 +388,54 @@ public class VmsEmployeeMaster implements Serializable {
 
 	public void setW2File(String w2File) {
 		this.w2File = w2File;
+	}
+
+
+
+	public String getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+
+
+	public void setDateOfJoining(String dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+
+
+	public String getEntryDate() {
+		return entryDate;
+	}
+
+
+
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
+	}
+
+
+
+	public String getUpdatedDate() {
+		return updatedDate;
+	}
+
+
+
+	public void setUpdatedDate(String updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+
+
+	public String getvEmployeeBillRate() {
+		return vEmployeeBillRate;
+	}
+
+
+
+	public void setvEmployeeBillRate(String vEmployeeBillRate) {
+		this.vEmployeeBillRate = vEmployeeBillRate;
 	}
 
 }
