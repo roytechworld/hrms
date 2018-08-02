@@ -6,12 +6,11 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="./resources/js/project.js"></script> 
  <link rel="stylesheet" href="./resources/css/projectCustom.css">
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-           Vendor user
+            Edit Admin user
                 <small>Management</small>
             </h1>
             <ol class="breadcrumb">
@@ -34,7 +33,7 @@
 
 
                                                     
-                        <form id="add_admin_form" method="POST"  action="vdadd" enctype="multipart/form-data" siq_id="autopick_9675">
+                        <form id="updateadmin" method="POST"  action="adminrecordsupdate" enctype="multipart/form-data" siq_id="autopick_9675">
                             <div class="panel-body">
                                 <div class="row">
                                     <div style="margin-top:20px;" class="col-xs-12 col-sm-12 col-md-12">
@@ -62,38 +61,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="email">Admin type<span style="color: red;">*</span></label>
-                                                      
-                                                    </td>
-                                                    <td>
-                                                          <select id="adminrecord" class="form-control" name="adminrecord">
-
-                                                           <option value="">----Select Admin -----</option>
-                                                            <c:forEach var="adminlist" items="${adminlist}">
-
-                                                            <option value="${adminlist}">${adminlist.firstName}</option>
-
-                                                           </c:forEach>
-
-                                                         </select>
-                                                    </td
-                                                
-                                                  
-                                               
-                                                    </tr>
-                                                    <tr>
-                                                         <td>
                                                         <label for="email">First Name<span style="color: red;">*</span></label>
-                                                      
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="fname" name="fname" placeholder="First Name" value="">
+                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="fname" name="fname" value="<%=request.getAttribute("firstname") %>" placeholder="First Name" value="">
                                                     </td>
                                                     <td>
                                                         <label for="email">Last Name<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="lname" name="lname" placeholder="Last Name" value="">
+                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="lname" name="lname" placeholder="Last Name" value="<%=request.getAttribute("lastname") %>">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -101,16 +78,29 @@
                                                         <label for="email">Designation<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="vendor_designation" name="vendor_designation" placeholder="Designation" value="">
+                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="admin_designation" name="admin_designation" value="<%=request.getAttribute("designation") %>" placeholder="Designation" value="">
                                                     </td>
                                                     <td>
                                                         <label for="email">Company Name<span style="color: red;">*</span></label> 
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required]" type="text" id="vendor_company_name" name="vendor_company_name" placeholder="Company" value="">
+                                                        <input class="form-control validate[required]" type="text" id="admin_company_name" name="admin_company_name" value="<%=request.getAttribute("companyname") %>" placeholder="Company" value="">
                                                     </td>
                                                 </tr>
-                                        
+                                                <tr>
+                                                    <td>
+                                                        <label for="email">Employee ID</label>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control" type="text" id="admin_employee_id" name="admin_employee_id" placeholder="Employee ID" value=" <%=request.getAttribute("employeeid") %>">
+                                                    </td>
+                                                    <td>
+                                                        <label for="email">Email ID<span style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control validate[required,custom[email]]" type="text" id="email" name="email" value="<%=request.getAttribute("email") %>" placeholder="Email ID" value="">
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>
                                                         <label for="email">Password<span style="color: red;">*</span></label>
@@ -125,19 +115,31 @@
                                                         <input class="form-control validate[required,equals[password]]" type="password" id="conf_password" name="conf_password" placeholder="Confirm New Password">
                                                     </td>
                                                 </tr>
-                                           
                                                 <tr>
-                                                   <td>
-                                                        <label for="email">Email<span style="color: red;">*</span></label>
+                                                    <td>
+                                                        <label for="email">Phone No. <span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required]" type="text" id="email" name="email" placeholder="New Password">
+                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" value="<%=request.getAttribute("phonenumber") %>" placeholder="Phone No." value="">
                                                     </td>
                                                     <td>
-                                                        <label for="email">Contract Form Date<span style="color: red;">*</span></label>
+                                                        <label for="email">Fax No.</label>
                                                     </td>
                                                     <td>
-                                                         <input class="form-control validate[required]" type="text" id="contractdate" name="contractdate" placeholder="Company" value="">
+                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax" name="fax" value="<%=request.getAttribute("faxno") %>" placeholder="Fax" value="">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="email">Address <span style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <textarea name="address" id="address" class="form-control validate[required]" rows="5" cols="10"  placeholder="Address" style="resize: none;" >
+                                                   <%=request.getAttribute("address") %>
+                                                        
+                                                        </textarea>
+                                                        
+                                                        <input type="hidden" name="id" value="${admin.adminID}"/>
                                                     </td>
                                                     <td>&nbsp;</td>
                                                     <td>&nbsp;</td>
@@ -166,15 +168,13 @@
                                        
                                        
                                        
-                                        <button id="btsavendor" class="btn btn-success" type="button">Add Vendor</button>
+                                        <button id="btedit" class="btn btn-success" type="button">Update admin</button>
                                         
                                   
                                         
                                         <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-default">Back</a>
                                         
-                                        
-                                        
-                                        
+  
                                         
                                         <input type="hidden" name="sa_id" value="1">
                                     </div>

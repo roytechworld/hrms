@@ -9,15 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+@Component
 @Entity
 @Table(name="vms_admin_master")
 public class Admin {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int Id;
 	@Column(name="admin_id")
 	private int adminID;
+	
+	private int Id;
+
 	@Column(name="sa_id")
 	private int saId;
 	@Column(name="admin_type_id")

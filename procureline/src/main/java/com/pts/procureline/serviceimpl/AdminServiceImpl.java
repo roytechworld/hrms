@@ -4,13 +4,16 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Session;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +59,7 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 	}
 
 	@Override
-	public String uploadFile(String name, MultipartFile file) {
+	public boolean uploadFile(String name, MultipartFile file) {
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
@@ -82,49 +85,164 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 				logger.info("Server File Location="
 						+ serverFile.getAbsolutePath());
 
-				return "You successfully uploaded file=" + name;
+			
 			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+				
 			}
 		} else {
-			return "You failed to upload " + name
-					+ " because the file was empty.";
+			
 		}
+		return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
-	public List<Admin> getAdminData() {
+	public List<Admin> getAdminData(Session session) {
 		List<Admin> slist=new ArrayList<Admin>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction().begin();
+		
 		try
 		{
+			String hql = "Select * from vms_admin_master order by admin_id desc";
+			
+			Query query = session.createSQLQuery((hql));
+			List<Object> result = (List<Object>) query .list(); 
+			Iterator<Object> itr = result.iterator();
+			while(itr.hasNext()){
+			   Object[] obj = (Object[]) itr.next();
+			   //now you have one array of Object for each row
+			   Admin admindto=new Admin();
+			   
+			 admindto.setFile(obj[15].toString());
+			 admindto.setFirstName(obj[4].toString());
+			 admindto.setAdminCompanyName(obj[7].toString());
+			 admindto.setAdminDesignation(obj[6].toString());
+			 admindto.setAdminEmail(obj[9].toString());
+			 admindto.setPhoneNo("NA");
+			 admindto.setFaxNo("NA");
+			 
+			 slist.add(admindto);
 		
-			Criteria cr = session.createCriteria(Admin.class);
-			slist  =cr.list();
+
+			   //same way for all obj[2], obj[3], obj[4]
+			}
+			
 		}
 		catch(Exception e)  
 		{
 		logger.info("Error" +e);	
 		}
-		finally
-		{
+
+		
+		return slist;
+	}
+	@Override
+	public int adminDatasaveup(Admin admin,Session session) {
+		int status = 0;
+		
+		
+		try {
 			
-			if(session!=null)
-			{
-				session.clear();
-				session.close();
+			session.saveOrUpdate(admin);
+			System.out.println("status:::::"+status);
+            status=1;
+		
+			
+			
+			
+		} catch (Exception e) {
+			logger.error("Exception e"+e);
+		}
+		return status;
+	}
+	@Override
+	public List<Admin> getAdminDataByEmail(Session session,String emailid)
+	{
+	List<Admin> slist=new ArrayList<Admin>();
+		try
+		{
+			String hql = "Select * from vms_admin_master where admin_email='"+emailid+"' order by admin_id desc";
+			
+			Query query = session.createSQLQuery((hql));
+			List<Object> result = (List<Object>) query .list(); 
+			Iterator<Object> itr = result.iterator();
+			while(itr.hasNext()){
+			   Object[] obj = (Object[]) itr.next();
+			   //now you have one array of Object for each row
+			   Admin admindto=new Admin();
+			   
+			 admindto.setFile(obj[15].toString());
+			 admindto.setFirstName(obj[4].toString());
+			 admindto.setAdminCompanyName(obj[7].toString());
+			 admindto.setAdminDesignation(obj[6].toString());
+			 admindto.setAdminEmail(obj[9].toString());
+			 admindto.setPhoneNo("NA");
+			 admindto.setFaxNo("NA");
+			 admindto.setLastName(obj[5].toString());
+			 admindto.setAdminEmployeeId(obj[8].toString());
+			 admindto.setAddress(obj[14].toString());
+			 admindto.setAdminID(Integer.parseInt(obj[0].toString()));
+			 
+			 slist.add(admindto);
+		
+
+			   //same way for all obj[2], obj[3], obj[4]
 			}
 			
-			
 		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+
 		
 		return slist;
 	}
 	
 	
-	
-	
+	@Override
+	public List<Admin> getAdminDataByPara(Session session,String querys)
+	{
+	List<Admin> slist=new ArrayList<Admin>();
+		
+		try
+		{
+			String hql =querys;
+			
+			Query query = session.createSQLQuery((hql));
+			List<Object> result = (List<Object>) query .list(); 
+			Iterator<Object> itr = result.iterator();
+			while(itr.hasNext()){
+			   Object[] obj = (Object[]) itr.next();
+			   //now you have one array of Object for each row
+			   Admin admindto=new Admin();
+			   
+			 admindto.setFile(obj[15].toString());
+			 admindto.setFirstName(obj[4].toString());
+			 admindto.setAdminCompanyName(obj[7].toString());
+			 admindto.setAdminDesignation(obj[6].toString());
+			 admindto.setAdminEmail(obj[9].toString());
+			 admindto.setPhoneNo("NA");
+			 admindto.setFaxNo("NA");
+			 admindto.setLastName(obj[5].toString());
+			 admindto.setAdminEmployeeId(obj[8].toString());
+			 admindto.setAddress(obj[14].toString());
+			 admindto.setAdminID(Integer.parseInt(obj[0].toString()));
+			 
+			 slist.add(admindto);
+		
+
+			   //same way for all obj[2], obj[3], obj[4]
+			}
+			
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+
+		
+		return slist;
+	}
 	
 }

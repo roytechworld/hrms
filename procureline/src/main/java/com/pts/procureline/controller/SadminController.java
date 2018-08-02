@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.classic.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,17 @@ public class SadminController<T> extends DBConstant {
 	
 	@Autowired
 	GenericService<Object> objectlist;
+	
+	@Autowired
+	SessionFactory sessionFactory;
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
@@ -196,24 +209,28 @@ public class SadminController<T> extends DBConstant {
 		System.out.println("type found"+request.getParameter("type"));
 		String redirectpage="";
 		String sa_email="";
+		sa_email=user.getSa_email();
+		Session session=sessionFactory.openSession();
+		
+		try
+		{
+		session.beginTransaction().begin();
 		
 		if(request.getParameter("type").toString().equalsIgnoreCase("superadmin"))
 		{
-			sa_email=user.getSa_email();
 			
-			boolean checkUserSuperAdminAuthenticity=superadminservice.validateAuthenticity("sa_email",sa_email, SuperAdmin.class);
+			
+			boolean checkUserSuperAdminAuthenticity=superadminservice.validateAuthenticity("sa_email",sa_email, SuperAdmin.class,session);
 			if(checkUserSuperAdminAuthenticity)
 			{
-				mav.addObject("admincount", adminservice.getAdminData().size());
-				mav.addObject("vendorcount", vendorservicegeneric.getAnyDataGenericType(Vendor.class).size());
-				mav.addObject("consultantcount", consultantservicegeneric.getAnyDataGenericType(Consultant.class).size());
-				mav.addObject("employeecount", employeeservicegeneric.getAnyDataGenericType(VmsEmployeeMaster.class).size());
-				System.out.println(timesheetservice.retreiveAnydataWithonePARA_NotEqual_Mode("status", "1", VmsProjectTimesheetPeriod.class).size());
+				mav.addObject("admincount", adminservice.getAdminData(session).size());
+				mav.addObject("vendorcount", vendorservicegeneric.getAnyDataGenericType(Vendor.class,session).size());
+				mav.addObject("consultantcount", consultantservicegeneric.getAnyDataGenericType(Consultant.class,session).size());
+				mav.addObject("employeecount", employeeservicegeneric.getAnyDataGenericType(VmsEmployeeMaster.class,session).size());
 				
-				
-				
-				
-				List<Object> list=objectlist.retreiveAnydataWithJoining("", "");
+				//Work pending will be completed later 
+				/*
+				List<Object> list=objectlist.retreiveAnydataWithJoining("", "",session);
 				
 				Iterator<Object> itr=list.iterator();
 				while (itr.hasNext()) 
@@ -221,29 +238,29 @@ public class SadminController<T> extends DBConstant {
 					ProjectDto dto=new ProjectDto();
 				    Object rows[] = (Object[])itr.next();
 					
-					String n=rows[8].toString();
-					System.out.println(n);
-					
+					dto.setTimesheetid(rows[3].toString());
+					dto.setProjectcode(rows[14].toString());
+					dto.setProjectname(rows[18].toString());
+					dto.setCode(rows[35].toString());
+					dto.setName(rows[37].toString());
+					dto.setType(rows[17].toString());
+					dto.setStartdate("NA");
+					dto.setEnddate("NA");
+					dto.setSt("NA");
+					dto.setName("NA");
+					dto.setTimesheetstatus("Pending");
+					projectdtolist.add(dto);
 				}
 			
+				System.out.println(projectdtolist.size());
 				
-				/*
-				
-				for(VmsProjectTimesheetPeriod listt:timesheetservice.retreiveAnydataWithonePARA_NotEqual_Mode("status", "1", VmsProjectTimesheetPeriod.class))
-				{
-					ProjectDto ad=new ProjectDto();
-					ad.setTimesheetid(listt.getTimesheetId());
-				
-					ad.setProjectcode(projectservice.retreiveAnydataWithonePARAAnytype("id", listt.getProjectId(), VmsProjectMaster.class).get(0).getProjectCode());
-					
-					projectdtolist.add(ad);
-				
-					
-				}
 				*/
-			
 				
+				mav.addObject("stlist", projectdtolist);
 				mav.setViewName(redirectpage="dashboard");
+				
+				
+				session.getTransaction().commit();
 			}
 			else
 			{
@@ -254,7 +271,7 @@ public class SadminController<T> extends DBConstant {
 		}
 		else if(request.getParameter("type").toString().equalsIgnoreCase("admin"))
 		{
-			boolean checkUserSuperAdminAuthenticity=adminservicegeneric.validateAuthenticity("admin_email",sa_email, Admin.class);
+			boolean checkUserSuperAdminAuthenticity=adminservicegeneric.validateAuthenticity("admin_email",sa_email, Admin.class,session);
 			if(checkUserSuperAdminAuthenticity)
 			{
 				redirectpage="admindashboard";
@@ -276,6 +293,21 @@ public class SadminController<T> extends DBConstant {
 		{
 			redirectpage="emloyeedashboard";
 			mav.setViewName(redirectpage);
+		}
+		}
+		catch(Exception e)
+		{
+			session.getTransaction().rollback();
+			logger.error("Exception occur"+e);
+		}
+		finally
+		{
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+			
 		}
 			
 		return mav;
@@ -409,14 +441,13 @@ public class SadminController<T> extends DBConstant {
 		mav.setViewName("forgotpass");		
 		}
 	
-		
 		return mav;
 	}
 	
 
-	
 	//******************************************************************************************************************
 	//*******************************Login code ,forgot password ends here *********************************************
 	//******************************************************************************************************************	
 	
+
 }

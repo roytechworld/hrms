@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ include file = "include/header.jsp" %>
 <%@ include file = "include/sidemenu.jsp" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -126,23 +127,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                                                                <tr>
-                                                <td><a href="http://projecttrial.procuretech.net/procureline-vms/sadmin-view-period-timesheet/OA==">REC004002</a></td>
-                                                <td>REC004</td>
-                                                <td>PROCURELINE GRMS</td>
-                                                <td>TTC003</td>
-                                                <td>Urwashi Thakkar</td>
+                                
+                                
+                             
+                                
+                                <c:forEach var="stdentlistValue" varStatus="loop" items="${stlist}">
+                                
+                                                <tr>
+                                                <td><a href="#">${stdentlistValue.timesheetid}</a></td>
+                                                <td>${stdentlistValue.projectcode }</td>
+                                                <td>${stdentlistValue.projectname }  </td>
+                                                <td>${stdentlistValue.code } </td>
+                                                <td>${stdentlistValue.name } </td>
+                                                <td>${stdentlistValue.type }  </td>
+                                                <td>${stdentlistValue.startdate } </td>
+                                                <td>${stdentlistValue.enddate } </td>
+                                                <td>${stdentlistValue.st } </td>
+                                                <td>${stdentlistValue.ot } </td>
+                                                 
                                                 <td>
-                                                    Consultant                                                </td>
-                                                <td>05-08-2018</td>
-                                                <td>05-09-2018</td>
-                                                <td>24.00</td>
-                                                <td>0.00</td>
-                                                <td>
-                                                                                                            <span style="color: #f39c12;">Pending Approval</span>
-                                                                                                        </td>
+                                                <span style="color: #f39c12;">Pending Approval</span>
+                                                 </td>
                                             </tr>
-                                                                            </tbody>
+                                
+                                
+                                    </c:forEach>
+                                
+                                
+            
+                                
+                                
+                              </tbody>
                             </table>
                         </div>
                     </div>
@@ -177,51 +192,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                                                                    <tr>
-                                                            <td>3</td>
-                                                            <td> 
-                                                                                                                                    Timesheet Not Approved
-                                                                                                                            </td>
-                                                            <td><a href="http://projecttrial.procuretech.net/procureline-vms/sadmin-view-period-timesheet/MQ==">REC001001</a></td>
-                                                            <td>GRMS EMPLOYEE</td>
-                                                            <td>TCS001</td>
-                                                            <td>Developer</td>
-                                                            <td>Mr. Grms Vendor</td>
-                                                            <td>TCS Test</td>
-                                                            <td>Grms Admin</td>
-                                                            <td>
-                                                                Net 45                                                            </td>
-                                                            <td>
-                                                                01/01/2018 - 01/05/2018                                                            </td>
-                                                            <td>
-                                                                <div><strong>Standard Time
-                                                                        :</strong><br/> 40.00 hours                                                                </div>
-                                                                <br/>
-
-                                                                <div><strong>Over Time
-                                                                        :</strong><br/> 0.00 hours                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div><strong>Standard Rate
-                                                                        :</strong><br/> $20.00                                                                </div>
-                                                                <br/>
-
-                                                                <div><strong>Over Time Rate
-                                                                        :</strong><br/> $22.00                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div><strong>Standard Pay
-                                                                        :</strong><br/> $800.00                                                                </div>
-                                                                <br/>
-
-                                                                <div><strong>Over Time Pay
-                                                                        :</strong><br/> $0.00                                                                </div>
-
-                                                            </td>
-                                                            <td>
-                                                                                                                                    <label style="color:#e08e0b;">Pending Approval</label>
-                                                                                                                                </td>
-                                                        </tr>
+                                                                                                  
                                                         
                                         </tbody>
 
@@ -256,46 +227,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                                                                <tr>
-                                                        <td>1</td>
-                                                        <td>INV003</td>
-                                                        <td><a href="http://projecttrial.procuretech.net/procureline-vms/sadmin-view-period-timesheet/NQ==">REC002001</a></td>
-                                                        <td>Test Employee</td>
-                                                        <td>PSE001</td>
-                                                        <td>Developer</td>
-                                                        <td>
-                                                            Net 45                                                        </td>
-                                                        <td>
-                                                            01/01/2018 - 01/05/2018                                                        </td>
-                                                        <td>
-                                                            <div><strong>Standard Time
-                                                                    :</strong><br/> 20.00 hours                                                            </div>
-                                                            <br/>
-
-                                                            <div><strong>Over Time
-                                                                    :</strong><br/> 0.00 hours                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div><strong>Standard Rate
-                                                                    :</strong><br/> $80,000.00                                                            </div>
-                                                            <br/>
-
-                                                            <div><strong>Over Time Rate
-                                                                    :</strong><br/> $12.00                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div><strong>Standard Pay
-                                                                    :</strong><br/> $769.23                                                            </div>
-                                                            <br/>
-
-                                                            <div><strong>Over Time Pay
-                                                                    :</strong><br/> $0.00                                                            </div>
-
-                                                        </td>
-                                                        <td>
-                                                                                                                            <label style="color:green;">Invoice Approved</label>
-                                                                                                                        </td>
-                                                    </tr>
+                                                                                            
                                                     
                                         </tbody>
 

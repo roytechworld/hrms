@@ -4,8 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-
-import com.pts.procureline.model.VmsEmployeeMaster;
+import com.pts.procureline.model.Employee;
 import com.pts.procureline.service.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		this.sessionFactory = sessionFactory;
 	}
 	@Override
-	public int employeeData(VmsEmployeeMaster emp) {
+	public int employeeData(Employee emp) {
 		int status = 0;
 		System.out.println("emp:::::"+emp.toString());
 		Session session = sessionFactory.openSession();

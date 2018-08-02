@@ -186,6 +186,7 @@ public class VmsVendorMaster implements Serializable {
 	@Column(name="wbenc_file")
 	private String wbencFile;
 
+	
 	public VmsVendorMaster() {
 	}
 
@@ -340,10 +341,6 @@ public class VmsVendorMaster implements Serializable {
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
-
-
-
-
 
 	public Date getContractFromDate() {
 		return this.contractFromDate;

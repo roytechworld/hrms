@@ -18,7 +18,7 @@
 </div><ul class="sidebar-menu">
     <!--<li class="header">MAIN NAVIGATION</li>-->
     <li class="treeview  active ">
-        <a href="http://projecttrial.procuretech.net/procureline-vms/dashboard">
+        <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
     </li>
@@ -26,14 +26,14 @@
  
                       
                        <li class="treeview ">
-                <a href="http://projecttrial.procuretech.net/procureline-vms/"><i class="fa fa-book"></i> <span>Manage Admin User</span>
+                <a href="#"><i class="fa fa-book"></i> <span>Manage Admin User</span>
                                             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
-                                        </a>
+                 </a>
                                     <ul class="treeview-menu">
-                                                    <li ><a href="<%=request.getContextPath()%>/admin"><i class="fa fa-circle-o"></i> Admin Lists</a></li>
-                                                    </ul>
+                                                    <li ><a href="<%=request.getContextPath()%>/adminreport"><i class="fa fa-circle-o"></i> Admin Lists</a></li>
+                                    </ul>
                                 </li> 
                       
                       
@@ -44,13 +44,13 @@
                       
                       
                         <li class="treeview ">
-                <a href="http://projecttrial.procuretech.net/procureline-vms/"><i class="fa fa-book"></i> <span>Manage Vendor User</span>
+                <a href="#"><i class="fa fa-book"></i> <span>Manage Vendor User</span>
                                             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                                         </a>
                                     <ul class="treeview-menu">
-                                                    <li ><a href="http://projecttrial.procuretech.net/procureline-vms/vendor-user"><i class="fa fa-circle-o"></i> Vendor Lists</a></li>
+                                                    <li ><a href="<%=request.getContextPath()%>/vendorreport"><i class="fa fa-circle-o"></i> Vendor Lists</a></li>
                                                     </ul>
                                 </li>
                                 
@@ -58,17 +58,17 @@
                                 
                                 
                         <li class="treeview ">
-                <a href="http://projecttrial.procuretech.net/procureline-vms/vendor-docs"><i class="fa fa-book"></i> <span>Vendors Documents</span>
+                <a href="#"><i class="fa fa-book"></i> <span>Vendors Documents</span>
                                     </a>
                             </li>
                         <li class="treeview ">
-                <a href="http://projecttrial.procuretech.net/procureline-vms/"><i class="fa fa-book"></i> <span>Manage Consultant</span>
+                <a href="#"><i class="fa fa-book"></i> <span>Manage Consultant</span>
                                             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                                         </a>
                                     <ul class="treeview-menu">
-                                                    <li ><a href="http://projecttrial.procuretech.net/procureline-vms/consultant-user"><i class="fa fa-circle-o"></i> Consultant Lists</a></li>
+                                                    <li ><a href="<%=request.getContextPath()%>/consultantreport"><i class="fa fa-circle-o"></i> Consultant Lists</a></li>
                                                     </ul>
                                 </li>
                         <li class="treeview ">

@@ -1,8 +1,13 @@
 package com.pts.procureline.serviceimpl;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -16,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pts.procureline.model.Admin;
 import com.pts.procureline.model.SuperAdmin;
@@ -24,6 +30,8 @@ import com.pts.procureline.service.GenericService;
 public class GenericServiceImpl <T> implements GenericService<T> {
 	private static final Logger logger = LoggerFactory.getLogger(GenericServiceImpl.class);	
 	
+	@Autowired
+	ServletContext c;
 	@Autowired
 	SessionFactory sessionFactory;
 	
@@ -38,14 +46,13 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
-	public boolean validateAuthenticity(String fieldname ,String fieldvalue ,final Class<? extends T> typelass)
+	public boolean validateAuthenticity(String fieldname ,String fieldvalue ,final Class<? extends T> typelass,Session session)
 	{
     List<T> slist=new ArrayList<T>();
 		
 		boolean result=false;
 		
-		Session session = sessionFactory.openSession();
-		session.beginTransaction().begin();
+		
 		try
 		{
 			Criteria cr = session.createCriteria(typelass);
@@ -60,15 +67,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		{
 		logger.info("Error" +e);	
 		}
-		finally
-		{
-			
-			if(session!=null)
-			{
-				session.clear();
-				session.close();
-			}
-		}
+	
 		
 		return result;
 	}
@@ -158,11 +157,10 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public  List<T> getAnyDataGenericType(Class<? extends T> typelass) {
+	public  List<T> getAnyDataGenericType(Class<? extends T> typelass,Session session) {
 		List<T> slist=new ArrayList<T>();
 
-		Session session = sessionFactory.openSession();
-		session.beginTransaction().begin();
+		
 		try
 		{
 		
@@ -174,15 +172,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		{
 		logger.info("Error" +e);	
 		}
-		finally
-		{
-			
-			if(session!=null)
-			{
-				session.clear();
-				session.close();
-			}
-		}
+	
 		
 		return slist;
 	}
@@ -263,7 +253,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 			cr.add(Restrictions.eq(fieldname,fieldvalue));
 			List<T> list = (List<T>)cr.list();
 			
-		  val=	list.get(0).toString();
+		    val=	list.get(0).toString();
 			
 			
 		}
@@ -312,12 +302,11 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		return slist;
 	}
 	@Override
-	public List<Object> retreiveAnydataWithJoining(String querys,String para)
+	public List<Object> retreiveAnydataWithJoining(String querys,String para,Session session)
 	{
     List<Object> slist=new ArrayList<Object>();
 	
-		Session session = sessionFactory.openSession();
-		session.beginTransaction().begin();
+	
 		try
 		{
 			String hql = "SELECT C.*, S.*,e.* FROM vms_project_timesheet_period C, vms_project_master S, vms_employee_master e WHERE  e.`employee_id`=C.`employee_id` AND C.status='0'";
@@ -328,19 +317,67 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		{
 		logger.info("Error" +e);	
 		}
-		finally
-		{
-			
-			if(session!=null)
-			{
-				session.clear();
-				session.close();
-			}
-		}
+	
 		
 		return slist;
 	}
 	
+	@Override
+	public  boolean saveFile(MultipartFile file,String name)
+	{
+		
+		 name=file.getOriginalFilename();
+			if (!file.isEmpty()) {
+				try {
+
+					byte[] bytes = file.getBytes();
+
+					// Creating the directory to store file
+					String rootPath = System.getProperty("catalina.home");
+					File dir = new File(rootPath + File.separator + "tmpFiles");
+					if (!dir.exists())
+						dir.mkdirs();
+
+					// Create the file on server
+					System.out.println(c.getRealPath("/resources/"+name));
+					File serverFile = new File(c.getRealPath("/resources/"+name));
+				
+					BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(serverFile));
+					stream.write(bytes);
+					stream.close();
+
+					logger.info("Server File Location=" + serverFile.getAbsolutePath());
+
+				} catch (Exception e) {
+					
+				}
+			} 
+			else {
+			
+			}
+		
+		return false;
+	}
+	@Override
+	public List<T> retreiveAnydataWithonePARAUpdate(String fieldname ,String fieldvalue ,final Class<? extends T> typelass,Session session)
+	{
+    List<T> slist=new ArrayList<T>();
 	
+		
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			slist  =cr.list();
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+	
+		
+		return slist;
+	}
 
 }
