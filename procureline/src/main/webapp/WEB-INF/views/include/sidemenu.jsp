@@ -76,13 +76,13 @@
                                     </a>
                             </li>
                         <li class="treeview ">
-                <a href="http://projecttrial.procuretech.net/procureline-vms/"><i class="fa fa-book"></i> <span>Manage Employee</span>
+                <a href="#"><i class="fa fa-book"></i> <span>Manage Employee</span>
                                             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                                         </a>
                                     <ul class="treeview-menu">
-                                                    <li ><a href="http://projecttrial.procuretech.net/procureline-vms/superadmin-employee-list"><i class="fa fa-circle-o"></i> Employee Lists</a></li>
+                                                    <li ><a href="<%=request.getContextPath()%>/employeereport"><i class="fa fa-circle-o"></i> Employee Lists</a></li>
                                                     </ul>
                                 </li>
                         <li class="treeview ">

@@ -2,6 +2,9 @@ package com.pts.procureline.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.math.BigInteger;
 
@@ -10,6 +13,7 @@ import java.math.BigInteger;
  * The persistent class for the vms_employee_master database table.
  * 
  */
+@Component
 @Entity
 @Table(name="vms_employee_master")
 @NamedQuery(name="VmsEmployeeMaster.findAll", query="SELECT v FROM VmsEmployeeMaster v")
@@ -438,4 +442,19 @@ public class VmsEmployeeMaster implements Serializable {
 		this.vEmployeeBillRate = vEmployeeBillRate;
 	}
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//----------------------------------------------Extra Dto---------------------------------------------------------------------	
+	
+	
+	private String clientname;
+
+	public String getClientname() {
+		return clientname;
+	}
+
+	public void setClientname(String clientname) {
+		this.clientname = clientname;
+	}
+	
+	
 }

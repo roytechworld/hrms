@@ -12,6 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pts.procureline.model.Consultant;
 import com.pts.procureline.service.ConsultantService;
 
+/**
+ *  * @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 @Controller
 public class ConsultantController {
 	

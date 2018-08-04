@@ -1,5 +1,8 @@
 package com.pts.procureline.serviceimpl;
-
+/**
+ *   @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

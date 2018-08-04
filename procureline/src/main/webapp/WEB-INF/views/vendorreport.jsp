@@ -71,29 +71,29 @@
                                 
                              
                                 
-                                <c:forEach var="stdentlistValue" varStatus="loop" items="${vendorlist}">
+                                <c:forEach var="propertylist" varStatus="loop" items="${vendorlist}">
                                 
                                                 <tr>
                                                 <td>${loop.index+1}</td>
                                                
-                                                <td>${stdentlistValue.adminId}  </td>
+                                                <td>${propertylist.adminId}  </td>
                                                 <td>Not Available </td>
-                                                <td>${stdentlistValue.firstName }
+                                                <td>${propertylist.firstName }
                                                  </td>
-                                                <td>${stdentlistValue.vendorCompanyName }  </td>
-                                                <td>${stdentlistValue.vendorEmail} </td>
-                                                <td>${stdentlistValue.phoneNo} </td>
-                                                <td>${stdentlistValue.contractFromDate} </td>
-                                                <td>${stdentlistValue.contractToDate} </td>
+                                                <td>${propertylist.vendorCompanyName }  </td>
+                                                <td>${propertylist.vendorEmail} </td>
+                                                <td>${propertylist.phoneNo} </td>
+                                                <td>${propertylist.contractFromDate} </td>
+                                                <td>${propertylist.contractToDate} </td>
                                                 <td>Not Available </td>
                                           
                                                 <td>Not Available </td>
                                               
                                                 
-                                              <td style="text-align: center;">
+                                                <td style="text-align: center;">
                                                    
                                                     
-                                                    <a class="tbl_icon" href="#"  data-toggle="tooltip" title="" data-original-title="Edit ">
+                                                      <a class="tbl_icon" href="#" onclick="editvendor('${propertylist.vendorId}')"  data-toggle="tooltip" title="" data-original-title="Edit ">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #09274B;"></i>
                                                     </a>
 
@@ -129,8 +129,9 @@
                         </div>
                     </div>
                     
-                    <form id="edit" method="post">
+                    <form id="edit" action="vendorEdit" method="POST">
                     
+                    <input type="hidden" id="sentid" value="0" name="sentid"/>
                     
                     </form>
                     

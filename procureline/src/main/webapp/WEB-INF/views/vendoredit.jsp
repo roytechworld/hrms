@@ -11,7 +11,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-           Vendor user
+           Vendor user 
                 <small>Management</small>
             </h1>
             <ol class="breadcrumb">
@@ -31,9 +31,7 @@
                                 <p style="float: right;font-size: 11px;"><span style="color:red;">*</span>Required Fields</p>
                             </h3>
                         </div>
-
-
-                                                    
+                         
                         <form id="add_admin_form" method="POST"  action="vdadd" enctype="multipart/form-data" siq_id="autopick_9675">
                              <div class="panel-body">
                                 <div class="row">
@@ -166,7 +164,7 @@
                                        
                                        
                                        
-                                        <button id="btsavendor" class="btn btn-success" type="button">Add Vendor</button>
+                                        <button id="btsavendor" class="btn btn-success" type="button">Edit Vendor</button>
                                         
                                   
                                         

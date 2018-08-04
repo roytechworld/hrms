@@ -12,12 +12,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-              Consultant
+              Employee
                 <small>Management</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Consultant</a></li>
-                <li class="active">Consultant List</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Employee</a></li>
+                <li class="active">Employee List</li>
             </ol>
         </section>
 
@@ -38,8 +38,8 @@
                             <div class="panel-body" style="text-align: right">
                          
                          
-                           <a href="<%=request.getContextPath()%>/consultantaddCall" style="color: #09274B;"><i class="fa fa-plus" style="color: green;"></i> Add Consultant  </a>
-                                <a href="#" style="color: #09274B;"><i class="fa fa-plus" style="color: green;"></i> Add Project to Consultant</a>
+                           <a href="<%=request.getContextPath()%>/employeeaddCall" style="color: #09274B;"><i class="fa fa-plus" style="color: green;"></i> Add Employee  </a>
+                                <a href="#" style="color: #09274B;"><i class="fa fa-plus" style="color: green;"></i> Add Project to Employees</a>
                             </div>
                         </div>
                     </div>
@@ -53,29 +53,28 @@
                                     <tr>
                                         <th style="text-align: center;">SL No</th>
                                         <th style="text-align: center;">Admin Name </th>
-                                          <th style="text-align: center;">Company Name</th>
-                                        <th style="text-align: center;">Logo</th>
-                                        <th style="text-align: center;">Consultant code</th>
-                                      
-                                        <th style="text-align: center;">Consultant Name</th>
-                                        <th style="text-align: center;">Consultant Email</th>
-                                        <th style="text-align: center;">Consultant Designation</th>
-                                        <th style="text-align: center;">Consultant Category</th>
+                                          <th style="text-align: center;">Client Name</th>
+                                        <th style="text-align: center;">Photo</th>
+                                        <th style="text-align: center;">Employee code</th>
+                                        <th style="text-align: center;">Employee Name</th>
+                                        <th style="text-align: center;">Employee Email</th>
+                                        <th style="text-align: center;">Employee Designation</th>
+                                        <th style="text-align: center;">Employee Category</th>
                                         <th style="text-align: center;">Phone no</th>
                                         <th style="text-align: center;">Resume</th>
+                                        <th style="text-align: center;">Employee documents</th>
                                         <th style="text-align: center;">Time sheet</th>
-                                        <th style="text-align: center;">Work order</th>
-                                        <th style="text-align: center;">Consultant Documents</th>
                                         <th style="text-align: center;">Generate Login Details</th>
+                                        <th style="text-align: center;">On boarding</th>
                                         <th style="text-align: center;">Status</th>
-                                        <th style="text-align: center;">Action</th>
+                                         <th style="text-align: center;">Action</th>
                                               
                                     
                                     </tr>
                                 </thead>
                                 <tbody>
                                 
-                                <c:forEach var="stdentlistValue" varStatus="loop" items="${consultantlist}">
+                                <c:forEach var="stdentlistValue" varStatus="loop" items="${employeelist}">
                                 
                                                 <tr>
                                                 <td>${loop.index+1}</td>
@@ -105,10 +104,18 @@
                                                                                                              
                                                <td> </td>
                                                <td>NA </td>
-                                               <td>  <a class="tbl_icon" href="#"  data-toggle="tooltip" title="" data-original-title="Edit ">
-                                                      <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                     
-                                            </a> </td>
+                                               <td>  
+                                            
+                                            
+                                            
+                                            <a class="tbl_icon" href="#" data-toggle="tooltip" title="" data-original-title="Onboarding"><img src="http://projecttrial.procuretech.net/procureline-vms/assets/images/onboarding.png" style="width: 25px;"></a>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            </td>
                                                <td>NA </td>
                                                     <td>                   
                                                     <a class="tbl_icon" href="#" onclick=""  data-toggle="tooltip" title="" data-original-title="Edit ">

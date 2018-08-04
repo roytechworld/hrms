@@ -11,13 +11,13 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-           Vendor user
+           Consultant
                 <small>Management</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Admin user</a></li>
-                <li ><a href="<%=request.getContextPath()%>/adminreport"><i class="fa fa-dashboard"></i>Vendor List</a></li>
-                <li class="active">Vendor add</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Consultant</a></li>
+                <li ><a href="<%=request.getContextPath()%>/consultantreport"><i class="fa fa-dashboard"></i>Consultant List</a></li>
+                <li class="active">Consultant add</li>
             </ol>
         </section>
         <!-- Content Header (Page header) -->
@@ -33,9 +33,8 @@
                         </div>
 
 
-                                                    
-                        <form id="add_admin_form" method="POST"  action="vdadd" enctype="multipart/form-data" siq_id="autopick_9675">
-                             <div class="panel-body">
+                       <form id="add_admin_form" method="POST"  action="consultadd" enctype="multipart/form-data" siq_id="autopick_9675">
+                                 <div class="panel-body">
                                 <div class="row">
                                     <div style="margin-top:20px;" class="col-xs-12 col-sm-12 col-md-12">
 
@@ -62,35 +61,33 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="email">Vendor <span style="color: red;">*</span></label>
+                                                        <label for="email">Vendor type<span style="color: red;">*</span></label>
                                                       
                                                     </td>
                                                     <td>
                                                           <select id="adminrecord" class="form-control" name="adminrecord">
 
-                                                           <option value="">----Select Admin -----</option>
-                                                            <c:forEach var="adminlist" items="${adminlist}">
+                                                           <option value="">----Select Vendor -----</option>
+                                                            <c:forEach var="vendorlist" items="${vendorlist}">
 
-                                                            <option value="${adminlist.adminID}">${adminlist.firstName}</option>
+                                                            <option value="${vendorlist.vendorId}">${vendorlist.firstName}</option>
 
                                                            </c:forEach>
 
                                                          </select>
                                                     </td>
                                                 
-                                                  
-                                               
                                                     </tr>
                                                     <tr>
                                                          <td>
-                                                        <label for="email">First Name<span style="color: red;">*</span></label>
+                                                        <label for="email">Consultant First Name<span style="color: red;">*</span></label>
                                                       
                                                     </td>
                                                     <td>
                                                         <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="fname" name="fname" placeholder="First Name" value="">
                                                     </td>
                                                     <td>
-                                                        <label for="email">Last Name<span style="color: red;">*</span></label>
+                                                        <label for="email">Consultant Last Name<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
                                                         <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="lname" name="lname" placeholder="Last Name" value="">
@@ -98,50 +95,75 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="email">Designation<span style="color: red;">*</span></label>
+                                                        <label for="email">Consultant Category<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="vendor_designation" name="vendor_designation" placeholder="Designation" value="">
+                                                         <select id="category" name="category" class="form-control" name="adminrecord">
+
+                                                         
+
+                                                           <option value="">----Select category -----</option>
+                                                          
+
+                                                            <option value="1">w2</option>
+                                                            <option value="2">Subcontractor</option>
+                                                            <option value="3">1099</option>
+
+
+                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <label for="email">Company Name<span style="color: red;">*</span></label> 
+                                                        <label for="email">Upload Resume<span style="color: red;">*</span></label> 
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required]" type="text" id="vendor_company_name" name="vendor_company_name" placeholder="Company" value="">
+                                                        <input class="" type="file" name="file" id="image-file">
                                                     </td>
                                                 </tr>
                                         
                                                 <tr>
                                                     <td>
-                                                        <label for="email">Password<span style="color: red;">*</span></label>
+                                                        <label for="email">Phone no<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required]" type="password" id="password" name="password" placeholder="New Password">
+                                                        <input class="form-control validate[required]" type="text" id="phoneno" name="phoneno" placeholder="phone no">
                                                     </td>
                                                     <td>
-                                                        <label for="email">Confirm Password<span style="color: red;">*</span></label>
+                                                        <label for="email">FAX<span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,equals[password]]" type="password" id="conf_password" name="conf_password" placeholder="Confirm New Password">
+                                                        <input class="form-control validate[required,equals[password]]" type="text" id="fax" name="fax" placeholder="Fax">
                                                     </td>
                                                 </tr>
+                                                
+                                                
                                            
                                                 <tr>
                                                    <td>
-                                                        <label for="email">Email<span style="color: red;">*</span></label>
+                                                        <label for="email">Address <span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required]" type="text" id="email" name="email" placeholder="Email">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Contract Form Date<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                         <input class="form-control validate[required]" type="text" id="contractdate" name="contractdate" placeholder="Company" value="">
+                                                        <textarea name="address" id="address" class="form-control validate[required]" rows="5" cols="10" placeholder="Address" style="resize: none;"></textarea>
                                                     </td>
                                                     <td>&nbsp;</td>
                                                     <td>&nbsp;</td>
                                                 </tr>
+                                                
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <label for="email">Bill Rate<span style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control validate[required]" type="text" id="billrate" name="billrate" placeholder="phone no">
+                                                    </td>
+                                                    <td>
+                                                        <label for="email">Date of Joining<span style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control validate[required,equals[password]]" type="text" id="dateofjoining"  name="dateofjoining" placeholder="Date of joining">
+                                                    </td>
+                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -163,18 +185,9 @@
                                     
                                     
                                     <div class="col-xs-12 col-sm-12 col-md-12">
-                                       
-                                       
-                                       
-                                        <button id="btsavendor" class="btn btn-success" type="button">Add Vendor</button>
                                         
-                                  
-                                        
-                                        <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-default">Back</a>
-                                        
-                                        
-                                        
-                                        
+                                        <button id="consultantadd" class="btn btn-success" type="button">Add Consultant</button>
+                                        <a href="<%=request.getContextPath()%>/consultantreport" class="btn btn-default">Back</a>
                                         
                                         <input type="hidden" name="sa_id" value="1">
                                     </div>

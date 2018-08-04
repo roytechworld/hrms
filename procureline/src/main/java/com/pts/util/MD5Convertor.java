@@ -1,5 +1,8 @@
 package com.pts.util;
-
+/**
+ *   @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

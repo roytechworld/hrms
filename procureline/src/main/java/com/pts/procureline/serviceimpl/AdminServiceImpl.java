@@ -1,5 +1,8 @@
 package com.pts.procureline.serviceimpl;
-
+/**
+ *   @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -120,6 +123,7 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 			 admindto.setAdminEmail(obj[9].toString());
 			 admindto.setPhoneNo("NA");
 			 admindto.setFaxNo("NA");
+			 admindto.setAdminID(Integer.parseInt(obj[0].toString()));
 			 
 			 slist.add(admindto);
 		

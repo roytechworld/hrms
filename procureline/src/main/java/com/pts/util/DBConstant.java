@@ -1,5 +1,8 @@
 package com.pts.util;
-
+/**
+ *   @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 public class DBConstant {
 	//Server query
 	public static final String logincheckquery="from SuperAdmin where sa_email=:email And sa_password=:password";

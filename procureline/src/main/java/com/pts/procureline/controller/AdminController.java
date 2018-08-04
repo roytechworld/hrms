@@ -32,11 +32,16 @@ import com.pts.procureline.service.GenericService;
 import com.pts.util.DBConstant;
 import com.pts.util.MD5Convertor;
 
+/**
+ * * @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ * @param <T>
+ */
 @Controller
 public class AdminController<T> {
 
 	
-	
+//--------------------------------Auto wire and other configuration starts here----------------------------------------------------	
 	@Autowired
 	AdminService adminservice;
 	@Autowired
@@ -49,7 +54,10 @@ public class AdminController<T> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
+//--------------------------------Auto wire and other configuration ends here----------------------------------------------------	
 	
+	
+
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public ModelAndView addDataPage() {
 		
@@ -71,8 +79,6 @@ public class AdminController<T> {
 		return mav;
 	}
 	
-
-	
 	//File Upload-------------------------------------------------------------------------------------
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public ModelAndView uploadFile() {
@@ -83,9 +89,6 @@ public class AdminController<T> {
 		return mav;
 	}
 	
-
-	
-	
 	@RequestMapping(value = "/adminreport", method = RequestMethod.GET)
 	public ModelAndView addminreportcall() {
 		
@@ -94,10 +97,7 @@ public class AdminController<T> {
 		try
 		{
 		session.beginTransaction().begin();
-		
-		
-		
-		
+	
 		mav.addObject("adminlist", adminservice.getAdminData(session));
 		}
 		catch(Exception e)
@@ -118,23 +118,13 @@ public class AdminController<T> {
 		return mav;
 	}
 	
-	
-	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody
 	String uploadFileHandler(@RequestParam("name") String name,
 	@RequestParam("file") MultipartFile file,HttpServletRequest request ) {
-
-		
-		System.out.println(request.getParameter("fname"));
-		
-		
-	boolean uploadstatus=adminservice.uploadFile(name, file)	;
-		
-		
-      return "";
-}
-	
+    boolean uploadstatus=adminservice.uploadFile(name, file)	;
+	return "";
+    }
 	
 	@RequestMapping(value = "/imageupload", method = RequestMethod.POST)
 	public ModelAndView showDashboard(@RequestParam("file") MultipartFile file ,HttpServletRequest request) 
@@ -143,11 +133,7 @@ public class AdminController<T> {
 		ModelAndView mav = new ModelAndView();
 		Session session=sessionFactory.openSession();
 		try
-		{
-			
-//		Vendor	vmodel=new Vendor();
-//		vmodel.setAddress(request.getParameter("address"));
-			
+		{	
 	    session.beginTransaction().begin();
 		adminobj.setFirstName(request.getParameter("fname"));
 		adminobj.setLastName(request.getParameter("lname"));
@@ -165,25 +151,15 @@ public class AdminController<T> {
 		adminobj.setIsDelete(0);
 		adminobj.setNamePrefix("NA");
 		adminobj.setPhoneExt("0");
-		
-		
 		adminobj.setId(0);
 		adminobj.setChangePassword(1);
 		adminobj.setStatus(1);
 		adminobj.setForgotPasswordOtp("456");
-		
-		
 		 java.util.Date date=new java.util.Date();
-         
          java.sql.Date sqlDate=new java.sql.Date(date.getTime());
          java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
-		
 		 adminobj.setEntryDate(sqlTime);
 		 adminobj.setUpdatedDate(sqlTime);
-		
-		
-		
-		
 		int i=	adminservice.adminDatasaveup(adminobj, session);
 		session.getTransaction().commit();
 		if(i>0)
@@ -290,24 +266,16 @@ public class AdminController<T> {
 		adminobj.setIsDelete(0);
 		adminobj.setNamePrefix("NA");
 		adminobj.setPhoneExt("0");
-		
 		adminobj.setId(0);
 		adminobj.setChangePassword(1);
 		adminobj.setStatus(1);
 		adminobj.setForgotPasswordOtp("456");
-		
-		
 		 java.util.Date date=new java.util.Date();
-         
          java.sql.Date sqlDate=new java.sql.Date(date.getTime());
          java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 		
 		 adminobj.setEntryDate(sqlTime);
 		 adminobj.setUpdatedDate(sqlTime);
-		
-		
-		
-		
 		int i=	adminservice.adminDatasaveup(adminobj, session);
 		session.getTransaction().commit();
 		if(i>0)
@@ -338,9 +306,5 @@ public class AdminController<T> {
 		mav.setViewName("adminform");
 		return mav;
 	}
-	
 
-	
-	
-	
 }

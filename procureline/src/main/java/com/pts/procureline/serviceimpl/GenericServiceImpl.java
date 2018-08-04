@@ -1,5 +1,11 @@
 package com.pts.procureline.serviceimpl;
 
+/**
+ * @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ * 
+ */
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,6 +22,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pts.procureline.model.Admin;
 import com.pts.procureline.model.SuperAdmin;
+import com.pts.procureline.model.VmsClientMaster;
 import com.pts.procureline.service.GenericService;
+
 
 public class GenericServiceImpl <T> implements GenericService<T> {
 	private static final Logger logger = LoggerFactory.getLogger(GenericServiceImpl.class);	
@@ -51,8 +60,6 @@ public class GenericServiceImpl <T> implements GenericService<T> {
     List<T> slist=new ArrayList<T>();
 		
 		boolean result=false;
-		
-		
 		try
 		{
 			Criteria cr = session.createCriteria(typelass);
@@ -67,8 +74,6 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		{
 		logger.info("Error" +e);	
 		}
-	
-		
 		return result;
 	}
 	
@@ -77,22 +82,14 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	@Override
 	public  List<T> getDataGeneric(Class<? extends T> typelass) {
 		List<T> slist=new ArrayList<T>();
-		
-		
-		
+	
 		Session session = sessionFactory.openSession();
 		session.beginTransaction().begin();
 		try
 		{
-		
 			Criteria cr = session.createCriteria(typelass);
 			cr.add(Restrictions.eq("sa_email","sadmin@procureline.us"));
 			slist  =cr.list();
-			
-			
-			
-			
-			
 		}
 		catch(Exception e)  
 		{
@@ -100,14 +97,11 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		}
 		finally
 		{
-			
 			if(session!=null)
 			{
 				session.clear();
 				session.close();
 			}
-			
-			
 		}
 		
 		return slist;
@@ -160,11 +154,10 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 	public  List<T> getAnyDataGenericType(Class<? extends T> typelass,Session session) {
 		List<T> slist=new ArrayList<T>();
 
-		
 		try
 		{
-		
 			Criteria cr = session.createCriteria(typelass);
+			cr.addOrder(Order.desc("vendorId"));
 			slist  =cr.list();
 
 		}
@@ -359,6 +352,9 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		
 		return false;
 	}
+	
+//**********************************************************************************************************************************************
+//**************************************************MEthod is used for retrieving single rows based on one PARA*********************************************************************	
 	@Override
 	public List<T> retreiveAnydataWithonePARAUpdate(String fieldname ,String fieldvalue ,final Class<? extends T> typelass,Session session)
 	{
@@ -368,7 +364,7 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		try
 		{
 			Criteria cr = session.createCriteria(typelass);
-			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			cr.add(Restrictions.eq(fieldname,Integer.parseInt(fieldvalue)));
 			slist  =cr.list();
 		}
 		catch(Exception e)  
@@ -379,5 +375,100 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		
 		return slist;
 	}
+//**************************************************************************************************************************************************************************************	
+	@Override
+	@SuppressWarnings("unchecked")
+	public  List<T> getAnyDataGenericTypeOrderByPARA(Class<? extends T> typelass,Session session,String propertyname) {
+		List<T> slist=new ArrayList<T>();
+		try
+		{
+		
+			Criteria cr = session.createCriteria(typelass);
+			cr.addOrder(Order.desc(propertyname));
+			slist  =cr.list();
 
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+	
+		
+		return slist;
+	}
+	
+	
+	@Override
+	public int saveupdateAnyPojo(T pojoclass,Session session) {
+		int status = 0;
+		try {
+			
+			session.saveOrUpdate(pojoclass);
+			System.out.println("status:::::"+status);
+            status=1;
+
+		} catch (Exception e) {
+			logger.error("Exception e"+e);
+		}
+		return status;
+	}
+	@Override
+	public List<T> retreiveAnydataWithtwoPARAOrderBy(String fieldname ,String fieldvalue ,String orderbyPropertyfiled,final Class<? extends T> typelass,Session session)
+	{
+    List<T> slist=new ArrayList<T>();
+	
+		
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			cr.addOrder(Order.desc(orderbyPropertyfiled));
+			slist  =cr.list();
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+	
+		
+		return slist;
+	}
+	
+	@Override
+	public List<VmsClientMaster> getClientData(Session session,String emailid)
+	{
+	List<VmsClientMaster> slist=new ArrayList<VmsClientMaster>();
+		try
+		{
+			String hql = "Select * from vms_client_master ";
+			
+			Query query = session.createSQLQuery((hql));
+			List<Object> result = (List<Object>) query .list(); 
+			Iterator<Object> itr = result.iterator();
+			while(itr.hasNext())
+			{
+			   Object[] obj = (Object[]) itr.next();
+			   //now you have one array of Object for each row
+			 VmsClientMaster propertydto=new VmsClientMaster();
+
+			 propertydto.setId(Integer.parseInt(obj[0].toString()));
+			 propertydto.setClientName(obj[1].toString());
+			 propertydto.setWorkOrderNote(obj[2].toString());
+			 propertydto.setStatus(obj[3].toString());
+
+			 slist.add(propertydto);
+		
+			   //same way for all obj[2], obj[3], obj[4]
+			}
+			
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+
+		
+		return slist;
+	}
+	
 }

@@ -3,11 +3,14 @@ package com.pts.procureline.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.stereotype.Component;
+
 
 /**
  * The persistent class for the vms_client_master database table.
  * 
  */
+@Component
 @Entity
 @Table(name="vms_client_master")
 @NamedQuery(name="VmsClientMaster.findAll", query="SELECT v FROM VmsClientMaster v")
@@ -16,6 +19,7 @@ public class VmsClientMaster implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
 	private int id;
 
 	@Column(name="client_name")

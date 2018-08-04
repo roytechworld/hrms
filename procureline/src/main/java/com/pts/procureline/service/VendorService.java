@@ -1,5 +1,8 @@
 package com.pts.procureline.service;
-
+/**
+ *   @author Pradipto Roy (Java Developer in PTS Development team)
+ *
+ */
 import java.util.List;
 
 import org.hibernate.Session;
@@ -15,5 +18,4 @@ public interface VendorService {
 	
 	public List<VmsVendorMaster> getvendorData(Session session);
 	public int vendorDatasaveup(Vendor admin,Session session) ;
-	
 }
