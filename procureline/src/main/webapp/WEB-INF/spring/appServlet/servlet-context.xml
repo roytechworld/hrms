@@ -23,7 +23,7 @@
 	
 	<context:component-scan base-package="com.pts.procureline" />
 	
-	
+	<!--  
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 			<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -31,6 +31,23 @@
 			<beans:property name="username" value="nodejsapp@procurenodejs" />
 			<beans:property name="password" value="Suite1702" />
 	</beans:bean>
+	
+	-->
+	
+	
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+			<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<beans:property name="url" value="jdbc:mysql://localhost:3306/staging?zeroDateTimeBehavior=convertToNull" />
+			<beans:property name="username" value="root" />
+			<beans:property name="password" value="root" />
+	</beans:bean>
+	
+	
+	
+	
+	
+	
+	
 
 
 		<beans:bean id="sessionFactory"

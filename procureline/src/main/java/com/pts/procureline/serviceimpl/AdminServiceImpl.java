@@ -106,7 +106,7 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 		
 		try
 		{
-			String hql = "Select * from vms_admin_master order by admin_id desc";
+			String hql = "Select * from vms_admin_master order by admin_id desc Limit 10";
 			
 			Query query = session.createSQLQuery((hql));
 			List<Object> result = (List<Object>) query .list(); 

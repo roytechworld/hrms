@@ -88,7 +88,9 @@ public class AdminController<T> {
 		
 		return mav;
 	}
-	
+	//**************************************************************************************************************
+	//**************************************Admin Data fetch in table***********************************************
+	//**************************************************************************************************************
 	@RequestMapping(value = "/adminreport", method = RequestMethod.GET)
 	public ModelAndView addminreportcall() {
 		
@@ -97,6 +99,12 @@ public class AdminController<T> {
 		try
 		{
 		session.beginTransaction().begin();
+		
+		
+		
+		
+		
+		
 	
 		mav.addObject("adminlist", adminservice.getAdminData(session));
 		}
@@ -117,7 +125,9 @@ public class AdminController<T> {
 		
 		return mav;
 	}
-	
+	//*******************************************************************************************************************
+	//**************************************Admin Data fetch in table ends***********************************************
+	//*******************************************************************************************************************
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody
 	String uploadFileHandler(@RequestParam("name") String name,
@@ -125,7 +135,9 @@ public class AdminController<T> {
     boolean uploadstatus=adminservice.uploadFile(name, file)	;
 	return "";
     }
+
 	
+//******************************************** Admin Data save Process begins here **********************************************	
 	@RequestMapping(value = "/imageupload", method = RequestMethod.POST)
 	public ModelAndView showDashboard(@RequestParam("file") MultipartFile file ,HttpServletRequest request) 
 	{
@@ -190,7 +202,9 @@ public class AdminController<T> {
 		mav.setViewName("adminform");
 		return mav;
 	}
+	//******************************************** Admin Data save Process ends here **********************************************	
 	
+	//******************************************** Admin Data edit Brgins  here **********************************************	
 	@RequestMapping(value = "/editadmin", method = RequestMethod.POST)
 	public ModelAndView editadmin(HttpServletRequest request) {
 		
@@ -249,7 +263,6 @@ public class AdminController<T> {
 			adminobj=admin;
 		}
 	    
-	    
 		adminobj.setFirstName(request.getParameter("fname"));
 		adminobj.setLastName(request.getParameter("lname"));
 		adminobj.setAdminDesignation(request.getParameter("admin_designation"));
@@ -306,5 +319,5 @@ public class AdminController<T> {
 		mav.setViewName("adminform");
 		return mav;
 	}
-
+	//******************************************** Admin Data ends  here **********************************************
 }
