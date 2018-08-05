@@ -43,16 +43,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
         <!-- Favicon -->
 
         <link rel="icon" sizes="57x57" href="http://projecttrial.procuretech.net/procureline-vms/assets/favicon.ico/apple-icon-57x57.png">

@@ -3,8 +3,21 @@
 <%@ include file = "include/header.jsp" %>
 <%@ include file = "include/sidemenu.jsp" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="./resources/js/project.js"></script> 
+ 
+ <script type="text/javascript">
+ 
+ $(document).ready(function()		
+			{
+	$("#timesheet_tbl").dataTable({
+	    "paging": false
+	});
+ 
+			});
+ 
+ </script>
+ 
  <link rel="stylesheet" href="./resources/css/projectCustom.css">
 
     <!-- Content Wrapper. Contains page content -->
@@ -112,7 +125,18 @@
                                     </c:forEach>
                                 
                                 
-            
+            <tr>
+    <td colspan=6>
+    
+    
+     <c:forEach var="pagination" varStatus="loops" items="${paginationlist}">
+     <a href="<%=request.getContextPath()%>/adminreport/${loops.index+1}">${loops.index+1}</a>   
+     </c:forEach>
+  
+    
+    
+    </td>
+    <tr>
                                 
                                 
                               </tbody>

@@ -32,11 +32,10 @@
                         </span>
                  </a>
                                     <ul class="treeview-menu">
-                                                    <li ><a href="<%=request.getContextPath()%>/adminreport"><i class="fa fa-circle-o"></i> Admin Lists</a></li>
+                                                    <li ><a href="<%=request.getContextPath()%>/adminreport/0"><i class="fa fa-circle-o"></i> Admin Lists</a></li>
                                     </ul>
                                 </li> 
-                      
-                      
+                                            
                       
                       
                       

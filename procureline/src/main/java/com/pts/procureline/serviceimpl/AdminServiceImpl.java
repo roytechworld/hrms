@@ -141,6 +141,50 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 		return slist;
 	}
 	@Override
+	public List<Admin> getAdminData(Session session,Integer pageid,Integer total) {
+		List<Admin> slist=new ArrayList<Admin>();
+		
+		try
+		{
+			String hql = "Select * from vms_admin_master order by admin_id desc Limit "+pageid+","+total;
+			
+			Query query = session.createSQLQuery((hql));
+			List<Object> result = (List<Object>) query .list(); 
+			Iterator<Object> itr = result.iterator();
+			while(itr.hasNext()){
+			   Object[] obj = (Object[]) itr.next();
+			   //now you have one array of Object for each row
+			   Admin admindto=new Admin();
+			   
+			 admindto.setFile(obj[15].toString());
+			 admindto.setFirstName(obj[4].toString());
+			 admindto.setAdminCompanyName(obj[7].toString());
+			 admindto.setAdminDesignation(obj[6].toString());
+			 admindto.setAdminEmail(obj[9].toString());
+			 admindto.setPhoneNo("NA");
+			 admindto.setFaxNo("NA");
+			 admindto.setAdminID(Integer.parseInt(obj[0].toString()));
+			 
+			 slist.add(admindto);
+		
+
+			   //same way for all obj[2], obj[3], obj[4]
+			}
+			
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+
+		
+		return slist;
+	}
+	
+	
+	
+	
+	@Override
 	public int adminDatasaveup(Admin admin,Session session) {
 		int status = 0;
 		

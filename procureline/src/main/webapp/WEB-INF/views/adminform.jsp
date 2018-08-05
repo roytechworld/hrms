@@ -5,6 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="./resources/js/project.js"></script> 
+ 
  <link rel="stylesheet" href="./resources/css/projectCustom.css">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

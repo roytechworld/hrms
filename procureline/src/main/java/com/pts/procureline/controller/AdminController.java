@@ -3,6 +3,7 @@ package com.pts.procureline.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -91,22 +92,40 @@ public class AdminController<T> {
 	//**************************************************************************************************************
 	//**************************************Admin Data fetch in table***********************************************
 	//**************************************************************************************************************
-	@RequestMapping(value = "/adminreport", method = RequestMethod.GET)
-	public ModelAndView addminreportcall() {
+	
+	// Note : This method will load only first 10 records from database desc order. Other records are binded with pagination.
+	//This method overcome the problem of loading large data at once and also increase the performance and speed of query fetch.
+	
+	
+	@RequestMapping(value = "/adminreport/{pageid}")
+	public ModelAndView addminreportcall(@PathVariable int pageid) {
 		
 		ModelAndView mav = new ModelAndView();
 		Session session=sessionFactory.openSession();
 		try
 		{
-		session.beginTransaction().begin();
+		  session.beginTransaction().begin();
 		
+	      int total=10;  
+	      if(pageid==0){}  
+	       else
+	       {  
+	            pageid=(pageid-1)*total+1;  
+	       } 
+	      
+
+		 mav.addObject("adminlist", adminservice.getAdminData(session, pageid, total));
 		
+	     int paginationval=adminservice.getAdminData(session).size()/10;
+		  
+		    List<Integer> paginationcounter=new ArrayList<Integer>();
+			for(int i=0;i<paginationval;i++)
+			{
+				paginationcounter.add(i);
+			}
 		
-		
-		
-		
-	
-		mav.addObject("adminlist", adminservice.getAdminData(session));
+		mav.addObject("adminlist", adminservice.getAdminData(session, pageid, total));
+		mav.addObject("paginationlist", paginationcounter); 
 		}
 		catch(Exception e)
 		{

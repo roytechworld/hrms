@@ -20,4 +20,5 @@ public interface AdminService {
 	public List<Admin> getAdminData(Session session);
 	public List<Admin> getAdminDataByEmail(Session session,String emailid);
 	public List<Admin> getAdminDataByPara(Session session,String query);
+	public List<Admin> getAdminData(Session session,Integer pageid,Integer total) ;
 }
