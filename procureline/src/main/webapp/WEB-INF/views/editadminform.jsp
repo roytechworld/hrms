@@ -4,8 +4,8 @@
 <%@ include file = "include/sidemenu.jsp" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <script src="./resources/js/project.js"></script> 
- <link rel="stylesheet" href="./resources/css/projectCustom.css">
+ <script src="<%=request.getContextPath() %>/resources/js/project.js"></script> 
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/projectCustom.css">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content-header">
@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Manage Admin user</a></li>
-                <li ><a href="<%=request.getContextPath()%>/adminreport"><i class="fa fa-dashboard"></i>Admin List</a></li>
+                <li ><a href="<%=request.getContextPath()%>/adminreport/0"><i class="fa fa-dashboard"></i>Admin List</a></li>
                 <li class="active">Admin add</li>
             </ol>
         </section>
@@ -120,13 +120,13 @@
                                                         <label for="email">Phone No. <span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" value="<%=request.getAttribute("phonenumber") %>" placeholder="Phone No." value="">
+                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" value="<%=request.getAttribute("phonenumber") %>" placeholder="Phone No." onkeyup="enterNumber('phone')" value="">
                                                     </td>
                                                     <td>
                                                         <label for="email">Fax No.</label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax" name="fax" value="<%=request.getAttribute("faxno") %>" placeholder="Fax" value="">
+                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax" name="fax" value="<%=request.getAttribute("faxno") %>" onkeyup="enterNumber('phone')" placeholder="Fax" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -172,7 +172,7 @@
                                         
                                   
                                         
-                                        <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-default">Back</a>
+                                        <a href="<%=request.getContextPath()%>/adminreport/0"  class="btn btn-default">Back</a>
                                         
   
                                         
@@ -200,6 +200,19 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    
+    
+    
+    <script type="text/javascript">
+    $(document).ready(function()		
+    		{
+
+    		});
+    
+    </script>
+    
+    
+    
     
     <%@ include file = "include/footer.jsp" %>
     

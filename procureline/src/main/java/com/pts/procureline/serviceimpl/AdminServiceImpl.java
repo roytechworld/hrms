@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -27,6 +29,8 @@ import com.pts.procureline.model.Admin;
 public class AdminServiceImpl implements com.pts.procureline.service.AdminService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+	@Autowired
+	ServletContext c;
 	
 	HibernateTemplate hibernateTemplate;
 	SessionFactory sessionFactory;
@@ -67,26 +71,20 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 			try {
 				byte[] bytes = file.getBytes();
 
-				// Creating the directory to store file
+			
 				String rootPath = System.getProperty("catalina.home");
-				//String rootPath="E:/WorkSpace/procureline/src/main/webapp/WEB-INF/uploadFile";
-				
-				
 						
 				File dir = new File(rootPath + File.separator + "tmpFiles");
 				if (!dir.exists())
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + name);
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
+				File serverFile = new File(dir.getAbsolutePath()+ File.separator + name);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
 
-				logger.info("Server File Location="
-						+ serverFile.getAbsolutePath());
+				logger.info("Server File Location=" + serverFile.getAbsolutePath());
 
 			
 			} catch (Exception e) {
@@ -209,7 +207,7 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 	List<Admin> slist=new ArrayList<Admin>();
 		try
 		{
-			String hql = "Select * from vms_admin_master where admin_email='"+emailid+"' order by admin_id desc";
+			String hql = "Select * from vms_admin_master where admin_id='"+emailid+"' order by admin_id desc";
 			
 			Query query = session.createSQLQuery((hql));
 			List<Object> result = (List<Object>) query .list(); 
@@ -224,8 +222,8 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 			 admindto.setAdminCompanyName(obj[7].toString());
 			 admindto.setAdminDesignation(obj[6].toString());
 			 admindto.setAdminEmail(obj[9].toString());
-			 admindto.setPhoneNo("NA");
-			 admindto.setFaxNo("NA");
+			 admindto.setPhoneNo(obj[12].toString());
+			 admindto.setFaxNo(obj[13].toString());
 			 admindto.setLastName(obj[5].toString());
 			 admindto.setAdminEmployeeId(obj[8].toString());
 			 admindto.setAddress(obj[14].toString());

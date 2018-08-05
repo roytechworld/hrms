@@ -16,7 +16,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Manage Admin user</a></li>
-                <li ><a href="<%=request.getContextPath()%>/adminreport"><i class="fa fa-dashboard"></i>Admin List</a></li>
+                <li ><a href="<%=request.getContextPath()%>/adminreport/0"><i class="fa fa-dashboard"></i>Admin List</a></li>
                 <li class="active">Admin add</li>
             </ol>
         </section>
@@ -121,13 +121,13 @@
                                                         <label for="email">Phone No. <span style="color: red;">*</span></label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" placeholder="Phone No." value="">
+                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" placeholder="Phone No." onkeyup="enterNumber('phone')" value="">
                                                     </td>
                                                     <td>
                                                         <label for="email">Fax No.</label>
                                                     </td>
                                                     <td>
-                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax" name="fax" placeholder="Fax" value="">
+                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax"  name="fax"  onkeyup="enterNumber('fax')" placeholder="Fax" value="">
                                                     </td>
                                                 </tr>
                                                 <tr>

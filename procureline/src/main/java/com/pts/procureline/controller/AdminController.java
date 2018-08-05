@@ -31,6 +31,7 @@ import com.pts.procureline.model.Vendor;
 import com.pts.procureline.service.AdminService;
 import com.pts.procureline.service.GenericService;
 import com.pts.util.DBConstant;
+import com.pts.util.FileUploadToolForPTS;
 import com.pts.util.MD5Convertor;
 
 /**
@@ -52,6 +53,9 @@ public class AdminController<T> {
 	
 	@Autowired
 	GenericService<Admin> adservice;
+	
+	@Autowired
+	ServletContext c;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
@@ -93,7 +97,7 @@ public class AdminController<T> {
 	//**************************************Admin Data fetch in table***********************************************
 	//**************************************************************************************************************
 	
-	// Note : This method will load only first 10 records from database desc order. Other records are binded with pagination.
+	// Note : This method will load only first 6 records from database desc order. Other records are binded with pagination.
 	//This method overcome the problem of loading large data at once and also increase the performance and speed of query fetch.
 	
 	
@@ -106,17 +110,17 @@ public class AdminController<T> {
 		{
 		  session.beginTransaction().begin();
 		
-	      int total=10;  
+	      int total=6;  
 	      if(pageid==0){}  
 	       else
 	       {  
-	            pageid=(pageid-1)*total+1;  
+	            pageid=(pageid)*total+1;  
 	       } 
 	      
 
 		 mav.addObject("adminlist", adminservice.getAdminData(session, pageid, total));
 		
-	     int paginationval=adminservice.getAdminData(session).size()/10;
+	     int paginationval=adminservice.getAdminData(session).size()/total;
 		  
 		    List<Integer> paginationcounter=new ArrayList<Integer>();
 			for(int i=0;i<paginationval;i++)
@@ -191,12 +195,15 @@ public class AdminController<T> {
          java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 		 adminobj.setEntryDate(sqlTime);
 		 adminobj.setUpdatedDate(sqlTime);
+		 adminobj.setNamePrefix(request.getParameter("name_prefix"));
+		 
 		int i=	adminservice.adminDatasaveup(adminobj, session);
 		session.getTransaction().commit();
 		if(i>0)
 		{
-			boolean uploadimage=adminservice.uploadFile(file.getOriginalFilename(), file);
-			mav.addObject("message", "Sucess ok");	
+				
+			boolean uploadimage=FileUploadToolForPTS.saveFile(file,  c.getRealPath("/resources/admin/"+file.getOriginalFilename()));
+	    mav.addObject("message", "Sucess ok");	
 		}
 		else
 		{
@@ -224,24 +231,24 @@ public class AdminController<T> {
 	//******************************************** Admin Data save Process ends here **********************************************	
 	
 	//******************************************** Admin Data edit Brgins  here **********************************************	
-	@RequestMapping(value = "/editadmin", method = RequestMethod.POST)
-	public ModelAndView editadmin(HttpServletRequest request) {
+	@RequestMapping(value = "/editadmin" , method = RequestMethod.POST )
+	public ModelAndView editadmin(HttpServletRequest request, @RequestParam("id") String id) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println(request.getParameter("id"));
+		System.out.println(id);
         Session session=sessionFactory.openSession();
 		try
 		{
 		session.beginTransaction().begin();
 		
-		List<Admin> adminlist=adminservice.getAdminDataByEmail(session, request.getParameter("id").toString());
+		List<Admin> adminlist=adminservice.getAdminDataByEmail(session,id);
 		for(Admin admin:adminlist)
 		{
 			adminobj=admin;
 		}
 		
-		
 		request.setAttribute("firstname", adminobj.getFirstName());
+		
 		request.setAttribute("lastname", adminobj.getLastName());
 		request.setAttribute("designation", adminobj.getAdminDesignation());
 		request.setAttribute("companyname", adminobj.getAdminCompanyName());
@@ -250,8 +257,6 @@ public class AdminController<T> {
 		request.setAttribute("faxno", adminobj.getFaxNo());
 		request.setAttribute("address", adminobj.getAddress());
 		request.setAttribute("email", adminobj.getAdminEmail());
-		
-		
 		
 		mav.addObject("admin", adminobj);	
 		
@@ -302,6 +307,7 @@ public class AdminController<T> {
 		adminobj.setChangePassword(1);
 		adminobj.setStatus(1);
 		adminobj.setForgotPasswordOtp("456");
+		 adminobj.setNamePrefix(request.getParameter("name_prefix"));
 		 java.util.Date date=new java.util.Date();
          java.sql.Date sqlDate=new java.sql.Date(date.getTime());
          java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
@@ -312,7 +318,10 @@ public class AdminController<T> {
 		session.getTransaction().commit();
 		if(i>0)
 		{
-			boolean uploadimage=adminservice.uploadFile(file.getOriginalFilename(), file);
+//			boolean uploadimage=adminservice.uploadFile(file.getOriginalFilename(), file);
+			
+			boolean uploadimage=FileUploadToolForPTS.saveFile(file,  c.getRealPath("/resources/admin/"+file.getOriginalFilename()));
+			
 			mav.addObject("message", "Sucess ok");	
 		}
 		else
@@ -335,7 +344,7 @@ public class AdminController<T> {
 			}
 		}
 		
-		mav.setViewName("adminform");
+		mav.setViewName("editadminform");
 		return mav;
 	}
 	//******************************************** Admin Data ends  here **********************************************

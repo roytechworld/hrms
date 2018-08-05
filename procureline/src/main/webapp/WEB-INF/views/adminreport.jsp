@@ -4,7 +4,7 @@
 <%@ include file = "include/sidemenu.jsp" %>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <script src="./resources/js/project.js"></script> 
+ <script src="<%=request.getContextPath() %>/resources/js/project.js"></script> 
  
  <script type="text/javascript">
  
@@ -57,8 +57,8 @@
                             <h3 class="box-title"></h3>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-bordered table-striped" style="font-size: 12px;" id="timesheet_tbl">
+                        <div id="editload" class="box-body table-responsive no-padding">
+                            <table class="table table-bordered table-striped" style="font-size: 12px;" id="timesheet_tbld">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center;">SL No</th>
@@ -81,12 +81,10 @@
                                 
                                                 <tr>
                                                 <td>${loop.index+1}</td>
-                                                <td>NA</td>
+                                                <td><img src="<%=request.getContextPath()%>/resources/admin/${stdentlistValue.file}" height="40px" width="40px"/></td>
                                                 <td>${stdentlistValue.firstName }  </td>
                                                 <td>${stdentlistValue.adminDesignation } </td>
                                                 <td>${stdentlistValue.adminEmail }
-                                                
-                                            
                                                 
                                                  </td>
                                                 <td>${stdentlistValue.phoneNo }  </td>
@@ -97,7 +95,7 @@
                                               <td style="text-align: center;">
                                                    
                                                     
-                                                    <a class="tbl_icon" href="#" onclick="editadmin('${stdentlistValue.adminEmail }')"  data-toggle="tooltip" title="" data-original-title="Edit ">
+                                                    <a class="tbl_icon" href="#" id="edit${stdentlistValue.adminID}"  data-index="${stdentlistValue.adminID}"  name="edit" data-toggle="tooltip" title="" data-original-title="Edit ">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="color: #09274B;"></i>
                                                     </a>
 
@@ -126,17 +124,21 @@
                                 
                                 
             <tr>
-    <td colspan=6>
+    <td colspan=9 align="right">
     
-    
+    <a style="font-size: 17px" href="<%=request.getContextPath()%>/adminreport/0">1</a> 
+     
      <c:forEach var="pagination" varStatus="loops" items="${paginationlist}">
-     <a href="<%=request.getContextPath()%>/adminreport/${loops.index+1}">${loops.index+1}</a>   
+     
+     <a style="font-size: 17px" href="<%=request.getContextPath()%>/adminreport/${loops.index+1}">${loops.index+1+1}</a> 
+     
+
      </c:forEach>
   
     
     
     </td>
-    <tr>
+    </tr>
                                 
                                 
                               </tbody>
@@ -144,9 +146,9 @@
                         </div>
                     </div>
                     
-                    <form id="edit" method="post">
+                    <form id="edit" method="POST" action="editadmin">
                     
-                    
+                    <input type="hidden" id="sentid" value="0" name="sentid"/>
                     </form>
                     
                     
