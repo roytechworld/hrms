@@ -426,7 +426,7 @@ $(document).ready(function()
 		  	   var value="";
 				  
 				$.ajax({
-				url:"adminrecordsupdate",
+				url: getContextPath()+"/adminrecordsupdate",
 				type: "POST",
 				data: new FormData(document.getElementById("updateadmin")),
 		        enctype: 'multipart/form-data',
@@ -443,11 +443,11 @@ $(document).ready(function()
 					  	 $("#isa_success").fadeIn(3000);
 				    	 $("#isa_success").slideDown();
 						 $("#isa_success").show();
-				    	 $("#isa_success").html("<b style=font-size:18px>Admin records updated click back to view updated records  !!</b>");	
+				    	 $("#isa_success").html("<b style=font-size:18px>Admin records updated !!</b>");	
 				    	 $("#isa_success").fadeOut(7000)
 				    	 
-//				    	  var newUrl = getContextPath()+"/adminreport/0";
-//				    	  window.location.href = newUrl;
+				    	  var newUrl = getContextPath()+"/adminreport/0";
+				    	  window.location.href = newUrl;
 				    	 
 				    	 
 						}
@@ -538,10 +538,6 @@ $(document).ready(function()
 
 			    });
 		
-		
-	
-		
-	
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////// Admin ,Edit Others , ends here . Codes by Pradipto Roy//////////////////////////////////////////////////////////////////
@@ -699,47 +695,29 @@ $(document).ready(function()
 		$("a[name=edit]").on("click", function () {
 			
 		       var k = $(this).data("index"); 
-		   alert(k)
+		       
 		       var value="";
-			   $.ajax({
-				url:"editadmin?id="+k,
-				type: "POST",
-				data: value,
-				cache:false,
-			     success:function(data)
-					{
-						alert(data);
-						$("#editload").html(data);
-					}
-						
-				})
-		    
+			  
+		    	var value="";
+		       $("#ed").html("processing");	
+				
+				  $.ajax({
+					     url: getContextPath()+"/editadm?id="+k,
+					     type: "post",
+					     data: value,
+					     cache: false,
+					     success: function(data) {
+					
+					    	
+					    	 $("#ed").html(data);	
+					    	 
+					     }
+					     });
+				
 		});		
 			
 	});
 
-function editadmin(k)
-{
-	alert(k);
-	var value="";
-	   $.ajax({
-		url:"editadmin?id="+k,
-		type: "post",
-		data: value,
-		cache:false,
-	     success:function(data)
-			{
-				alert(data);
-				$("#editload").html(data);
-			}
-				
-		})
-	
-	
-
-//	window.location.replace(getContextPath()+"/editadmin?id="+k);
-
-}	
 function editvendor(k)
 {
 

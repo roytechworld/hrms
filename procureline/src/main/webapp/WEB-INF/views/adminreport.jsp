@@ -53,11 +53,9 @@
                             </div>
                         </div>
                     </div>
-                        <div class="box-header">
-                            <h3 class="box-title"></h3>
-                        </div>
+                       
                         <!-- /.box-header -->
-                        <div id="editload" class="box-body table-responsive no-padding">
+                        <div id="ed" class="box-body table-responsive no-padding">
                             <table class="table table-bordered table-striped" style="font-size: 12px;" id="timesheet_tbld">
                                 <thead>
                                     <tr>

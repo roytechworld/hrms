@@ -153,14 +153,21 @@ public class AdminServiceImpl implements com.pts.procureline.service.AdminServic
 			   Object[] obj = (Object[]) itr.next();
 			   //now you have one array of Object for each row
 			   Admin admindto=new Admin();
-			   
-			 admindto.setFile(obj[15].toString());
+			   if(obj[15].toString().equals(""))
+			   {
+				   admindto.setFile("user.png");   
+			   }
+			   else
+			   {
+				   admindto.setFile(obj[15].toString());   
+			   }
+			
 			 admindto.setFirstName(obj[4].toString());
 			 admindto.setAdminCompanyName(obj[7].toString());
 			 admindto.setAdminDesignation(obj[6].toString());
 			 admindto.setAdminEmail(obj[9].toString());
-			 admindto.setPhoneNo("NA");
-			 admindto.setFaxNo("NA");
+			 admindto.setPhoneNo(obj[12].toString());
+			 admindto.setFaxNo(obj[13].toString());
 			 admindto.setAdminID(Integer.parseInt(obj[0].toString()));
 			 
 			 slist.add(admindto);

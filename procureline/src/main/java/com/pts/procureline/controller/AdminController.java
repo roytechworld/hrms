@@ -116,9 +116,7 @@ public class AdminController<T> {
 	       {  
 	            pageid=(pageid)*total+1;  
 	       } 
-	      
-
-		 mav.addObject("adminlist", adminservice.getAdminData(session, pageid, total));
+	      		
 		
 	     int paginationval=adminservice.getAdminData(session).size()/total;
 		  
@@ -180,7 +178,16 @@ public class AdminController<T> {
 		adminobj.setPhoneNo(request.getParameter("phone"));
 		adminobj.setFaxNo(request.getParameter("fax"));
 		adminobj.setAddress(request.getParameter("address"));
-		adminobj.setFile(file.getOriginalFilename());
+		
+		if(file.getOriginalFilename().equals(null)||file.getOriginalFilename().equals(""))
+		{
+			adminobj.setFile("user.png");	
+		}
+		else
+		{
+			adminobj.setFile(file.getOriginalFilename());	
+		}
+		
 		adminobj.setBlockStatus(1);
 		adminobj.setIsAdmin(0);
 		adminobj.setIsDelete(0);
@@ -272,6 +279,49 @@ public class AdminController<T> {
 		return mav;
 	}
 	
+	
+	@RequestMapping(value = "/editadm", method = RequestMethod.POST)
+	public ModelAndView editadm(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		
+		System.out.println("id found"+request.getParameter("id"));
+		
+		Session session=sessionFactory.openSession();
+		try
+		{
+		List<Admin> adminlist=adminservice.getAdminDataByEmail(session,request.getParameter("id"));
+		for(Admin admin:adminlist)
+		{
+			adminobj=admin;
+		}
+		
+		request.setAttribute("firstname", adminobj.getFirstName());
+		
+		request.setAttribute("lastname", adminobj.getLastName());
+		request.setAttribute("designation", adminobj.getAdminDesignation());
+		request.setAttribute("companyname", adminobj.getAdminCompanyName());
+		request.setAttribute("employeeid", adminobj.getAdminEmployeeId());
+		request.setAttribute("phonenumber", adminobj.getPhoneNo());
+		request.setAttribute("faxno", adminobj.getFaxNo());
+		request.setAttribute("address", adminobj.getAddress());
+		request.setAttribute("email", adminobj.getAdminEmail());
+		
+		mav.addObject("admin", adminobj);
+		
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception occur"+e);
+		}
+		
+		
+		mav.setViewName("adminmodule/editadmin");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "/adminrecordsupdate", method = RequestMethod.POST)
 	public ModelAndView adminrecordsupdate(@RequestParam("file") MultipartFile file ,HttpServletRequest request) {
 		
@@ -297,7 +347,14 @@ public class AdminController<T> {
 		adminobj.setPhoneNo(request.getParameter("phone"));
 		adminobj.setFaxNo(request.getParameter("fax"));
 		adminobj.setAddress(request.getParameter("address"));
-		adminobj.setFile(file.getOriginalFilename());
+		if(file.getOriginalFilename().equals(null)||file.getOriginalFilename().equals(""))
+		{
+			adminobj.setFile("user.png");	
+		}
+		else
+		{
+			adminobj.setFile(file.getOriginalFilename());	
+		}
 		adminobj.setBlockStatus(1);
 		adminobj.setIsAdmin(0);
 		adminobj.setIsDelete(0);
@@ -348,4 +405,7 @@ public class AdminController<T> {
 		return mav;
 	}
 	//******************************************** Admin Data ends  here **********************************************
+	
+
+	
 }
