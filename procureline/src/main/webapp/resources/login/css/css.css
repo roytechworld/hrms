@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0px; padding: 0px;}
+li{list-style: none;}
+
+/*****  login Page  *****/ 
+
+.logo{ margin:0px auto;}
+.dropdown .btn{ padding: 0px;}
+
+#sign_in .col-xs-7, #sign_in .input-group:first-child, #sign_in .col-xs-6{ margin-bottom: 0px; padding: 0px;}
+#sign_in .input-group:first-child .input-group-addon{ padding: 0px; font-weight: normal}
+#sign_in .form-group{ margin-bottom: 0px;}
+#sign_in .form-group .form-control{ width:60%}
+#sign_in .bootstrap-select{border-bottom:0px !important; padding-top: 4px;}
+#sign_in option{ border: 0px;}
+
+
+footer{ color:#fff; font-size:0.9em;}
+footer hr{ margin-bottom: 5px;}
+.navbar-nav > li > a{margin:0px; padding:2px 7px 2px 0px;}
+.login-page .login-box footer a {color: #bd0d79;font-size: 12px;}
+.login-page .login-box footer a:hover {background: none; color:#fd54bc}
+
+/*****  //login Page  *****/ 
+
+/*****  forgot password Page  *****/ 
+.fp-page .fp-box footer a {color: #bd0d79;font-size: 12px;}
+.fp-page .fp-box footer a:hover {background: none; color:#fd54bc}
+/*****  //forgot password Page  *****/ 

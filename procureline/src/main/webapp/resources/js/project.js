@@ -13,6 +13,7 @@ $(document).ready(function()
 		$("#btsv").click(function()
 	    {
 			
+			
 			var login=$("#email").val();
 			var password=$("#password").val();
 			var type=$("#type").val();
@@ -22,8 +23,8 @@ $(document).ready(function()
 				
 				 $('#btsv').prop('disabled', true);
 			  	 $("#isa_success").fadeIn(2000);
-		    	 $("#isa_success").slideDown();
-				 $("#isa_success").show();
+  	    	     $("#isa_success").slideDown();
+				 $("#isa_success").show(1000);
 		    	 $("#isa_success").html("<b style=font-size:18px> Processing your request !!</b>");	
 		    	 
 				   var value="";
@@ -41,8 +42,8 @@ $(document).ready(function()
 							{
 							
 						  	 $("#isa_success").fadeIn(3000);
-					    	 $("#isa_success").slideDown();
-							 $("#isa_success").show();
+				    	 $("#isa_success").slideDown();
+							 $("#isa_success").show(1000);
 					    	 $("#isa_success").html("<b style=font-size:18px>Sign in success opening your account !!</b>");	
 					    	
 							document.getElementById("frm").submit(); 
@@ -53,7 +54,7 @@ $(document).ready(function()
 					$("#isa_success").fadeOut();
 					$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Invalid credentials try again  !!</b>");
 			   		$("#isa_error").slideDown();
-			   		$("#isa_error").show();
+			   		$("#isa_error").show(1000);
 			   		$("#isa_error").fadeOut(7000)
 
 							}
@@ -64,8 +65,8 @@ $(document).ready(function()
 						   $('#btsv').prop('disabled', false)	;	
 						   $("#isa_success").fadeOut();
 							$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Something happens wrong !!</b>");
-					   		$("#isa_error").slideDown();
-					   		$("#isa_error").show();
+					   	
+					   		$("#isa_error").show(1000);
 					   		$("#isa_error").fadeOut(4500)
 					   }
 							
@@ -76,7 +77,7 @@ $(document).ready(function()
 				$('#btsv').prop('disabled', false)	;	
 					$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Login , password and type required   !!</b>");
 			   		$("#isa_error").slideDown();
-			   		$("#isa_error").show();
+			   		$("#isa_error").show(1000);
 			   		$("#isa_error").fadeOut(4500)
 				   
 				}
