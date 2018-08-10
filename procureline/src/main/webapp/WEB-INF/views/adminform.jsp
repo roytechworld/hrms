@@ -3,10 +3,10 @@
 <%@ include file = "include/header.jsp" %>
 <%@ include file = "include/sidemenu.jsp" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <script src="./resources/js/project.js"></script> 
+ <script src="<%=request.getContextPath() %>/resources/js/project.js"></script> 
+  <script src="<%=request.getContextPath() %>/resources/js/azaxload.js"></script> 
  
- <link rel="stylesheet" href="./resources/css/projectCustom.css">
+ <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/projectCustom.css">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content-header">
@@ -49,7 +49,7 @@
                                                         <label for="email">Image</label>
                                                     </td>
                                                     <td width="25%">
-                                                        <input class="" type="file" name="file" id="image-file">
+                                                        <input class="" type="file" name="file" accept="image/*" id="image-file">
                                                         <span style="color: red;">(Max File Size : 2MB)</span>
                                                     </td>
                                                     <td width="25%"><label for="email">Prefix</label></td>

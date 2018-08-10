@@ -1,36 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ include file = "include/header.jsp" %>
-<%@ include file = "include/sidemenu.jsp" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <script src="<%=request.getContextPath() %>/resources/js/project.js"></script> 
- <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/projectCustom.css">
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-            Edit Admin user
-                <small>Management</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Admin user</a></li>
-                <li ><a href="<%=request.getContextPath()%>/adminreport/0"><i class="fa fa-dashboard"></i>Admin List</a></li>
-                <li class="active">Admin add</li>
-            </ol>
-        </section>
-        <!-- Content Header (Page header) -->
-        <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                               
-                               
-                                <p style="float: right;font-size: 11px;"><span style="color:red;">*</span>Required Fields</p>
-                            </h3>
-                        </div>
-
 
                                                     
                         <form id="updateadmin" method="POST"  action="adminrecordsupdate" enctype="multipart/form-data" siq_id="autopick_9675">
@@ -181,39 +148,4 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
                    
-                   
-                  
-                   
-                </section>
-                
-                      
-
-                                        <!-- /.Left col -->
-            </div>
-            <!-- /.row (main row) -->
-
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    
-    
-    
-    <script type="text/javascript">
-    $(document).ready(function()		
-    		{
-
-    		});
-    
-    </script>
-    
-    
-    
-    
-    <%@ include file = "include/footer.jsp" %>
-    
- 
