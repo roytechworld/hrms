@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pts.procureline.controller.VendorController;
 import com.pts.procureline.model.Admin;
 import com.pts.procureline.model.Vendor;
-import com.pts.procureline.model.VmsVendorMaster;
+
 import com.pts.procureline.service.VendorService;
 
 public class VendorServiceImpl implements VendorService {
@@ -57,47 +57,7 @@ public class VendorServiceImpl implements VendorService {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	@Override
-	public List<VmsVendorMaster> getvendorData(Session session) {
-		List<VmsVendorMaster> slist=new ArrayList<VmsVendorMaster>();
-		
-		try
-		{
-			String hql = "Select * from vms_vendor_master order by vendor_id desc";
-			
-			Query query = session.createSQLQuery((hql));
-			List<Object> result = (List<Object>) query .list(); 
-			Iterator<Object> itr = result.iterator();
-			while(itr.hasNext()){
-			   Object[] obj = (Object[]) itr.next();
-			   //now you have one array of Object for each row
-			   VmsVendorMaster admindto=new VmsVendorMaster();
-			/*   
-			 admindto.setFile(obj[15].toString());
-			 admindto.setFirstName(obj[4].toString());
-			 admindto.setAdminCompanyName(obj[7].toString());
-			 admindto.setAdminDesignation(obj[6].toString());
-			 admindto.setAdminEmail(obj[9].toString());
-			 admindto.setPhoneNo("NA");
-			 admindto.setFaxNo("NA");
-			 
-			 slist.add(admindto);
-		*/
 
-			   //same way for all obj[2], obj[3], obj[4]
-			}
-			
-		}
-		catch(Exception e)  
-		{
-		logger.info("Error" +e);	
-		}
-
-		
-		return slist;
-	}
 	
 	
 	@Override

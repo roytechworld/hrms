@@ -74,10 +74,8 @@ public class Vendor {
 	@Column(name="client_support_pu_file")
 	private String clientSupportPuFile;
 
-	@Column(name="company_id")
+	@Column(name="companyname")
 	private String companyId;
-
-	
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="contract_from_date")
@@ -341,6 +339,8 @@ public class Vendor {
 	}
 
 	public void setCompanyId(String companyId) {
+		
+		System.out.println("company id found "+companyId);
 		this.companyId = companyId;
 	}
 
@@ -677,4 +677,15 @@ public class Vendor {
 				+ ", wbencFile=" + wbencFile + "]";
 	}
 
+	private String adminname;
+
+	public String getAdminname() {
+		return adminname;
+	}
+
+	public void setAdminname(String adminname) {
+		this.adminname = adminname;
+	}
+	
+	
 }

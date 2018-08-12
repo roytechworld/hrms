@@ -34,7 +34,7 @@
 
 
                                                     
-                        <form id="add_admin_form" method="POST"  action="vdadd" enctype="multipart/form-data" siq_id="autopick_9675">
+                        <form id="add_admin_form_Vendoradd" method="POST"  action="vdadds" enctype="multipart/form-data" siq_id="autopick_9675">
                              <div class="panel-body">
                                 <div class="row">
                                     <div style="margin-top:20px;" class="col-xs-12 col-sm-12 col-md-12">

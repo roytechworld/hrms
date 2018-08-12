@@ -27,4 +27,7 @@ public interface GenericService <T>{
 	public int saveupdateAnyPojo(T pojoclass,Session session);
 	public List<T> retreiveAnydataWithtwoPARAOrderBy(String fieldname ,String fieldvalue ,String orderbyPropertyfiled,final Class<? extends T> typelass,Session session);
 	public List<VmsClientMaster> getClientData(Session session,String emailid);
+	public String getAnyDataBasedOnOneParaByID(String fieldname ,Integer fieldvalue ,final Class<? extends T> typelass);
+	public List<T> getDataInListByPassingIntegerParameter_BINDING(String fieldname ,Integer fieldvalue ,final Class<? extends T> typelass,Session session);
+	public List<T> getDataInListByPassingStringParameter_BINDING(String fieldname ,String fieldvalue ,final Class<? extends T> typelass,Session session);
 }

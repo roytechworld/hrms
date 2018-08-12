@@ -471,4 +471,86 @@ public class GenericServiceImpl <T> implements GenericService<T> {
 		return slist;
 	}
 	
+	@Override
+	public String getAnyDataBasedOnOneParaByID(String fieldname ,Integer fieldvalue ,final Class<? extends T> typelass)
+	{
+		String val="";
+		Session session = sessionFactory.openSession();
+		session.beginTransaction().begin();
+		try
+		{
+			Criteria cr = session.createCriteria(typelass);
+			cr.add(Restrictions.eq(fieldname,fieldvalue));
+			List<T> list = (List<T>)cr.list();
+			
+		    val=	list.get(0).toString();
+			
+			
+		}
+		catch(Exception e)  
+		{
+		logger.info("Error" +e);	
+		}
+		finally
+		{
+			
+			if(session!=null)
+			{
+				session.clear();
+				session.close();
+			}
+		}
+		return val;
+	}
+	
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++++Use these method for binding and joining starts++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	
+	public List<T> getDataInListByPassingIntegerParameter_BINDING(String fieldname ,Integer fieldvalue ,final Class<? extends T> typelass,Session session)
+	{
+		   List<T> slist=new ArrayList<T>();
+					
+			try
+			{
+				Criteria cr = session.createCriteria(typelass);
+				cr.add(Restrictions.eq(fieldname,fieldvalue));
+				
+				slist  =cr.list();
+			}
+			catch(Exception e)  
+			{
+			logger.info("Error" +e);	
+			}
+		
+			
+			return slist;
+	}
+	
+	
+	public List<T> getDataInListByPassingStringParameter_BINDING(String fieldname ,String fieldvalue ,final Class<? extends T> typelass,Session session)
+	{
+		   List<T> slist=new ArrayList<T>();
+			
+			
+				try
+				{
+					Criteria cr = session.createCriteria(typelass);
+					cr.add(Restrictions.eq(fieldname,fieldvalue));
+					
+					slist  =cr.list();
+				}
+				catch(Exception e)  
+				{
+				logger.info("Error" +e);	
+				}
+			
+				
+				return slist;
+	}
+	
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++++Use these method for binding and joining ends here++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 }

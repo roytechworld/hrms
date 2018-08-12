@@ -337,68 +337,7 @@ $(document).ready(function()
 		}
 			
 		});
-		$("#btsavendor").click(function()
-			    {
-			
-		//Validation---------------->
-			
-			
-			$("#status").remove();
 
-				 $('#btsaveadmin').prop('disabled', true);
-			  	 $("#isa_success").fadeIn(2000);
-		    	 $("#isa_success").slideDown();
-				 $("#isa_success").show();
-		    	 $("#isa_success").html("<b style=font-size:18px> Please wait !!</b>");	
-			
-		    	
-		  	   var value="";
-				  
-				$.ajax({
-				url:"vdadd",
-				type: "POST",
-				data: new FormData(document.getElementById("add_admin_form")),
-		        enctype: 'multipart/form-data',
-		        processData: false,
-		        contentType: false,
-				success:function(data)
-				{
-					var str = data;
-					var n = str.search("ok");
-					if(parseInt(n)>0)
-						{
-						
-						 $('#btsaveadmin').prop('disabled', false);
-					  	 $("#isa_success").fadeIn(3000);
-				    	 $("#isa_success").slideDown();
-						 $("#isa_success").show();
-				    	 $("#isa_success").html("<b style=font-size:18px>Vendor registration completed !!</b>");	
-				    	 window.location.replace(getContextPath()+"/vendorreport");
-						}
-					else
-						{
-				$('#btsaveadmin').prop('disabled', false)	;	
-				$("#isa_success").fadeOut();
-				$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Sorry try again  !!</b>");
-		   		$("#isa_error").slideDown();
-		   		$("#isa_error").show();
-		   		$("#isa_error").fadeOut(7000)
-
-						}
-				},
-				   error: function() {
-					   $('#btsaveadmin').prop('disabled', false)	;	
-					   $("#isa_success").fadeOut();
-						$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Something happens wrong !!</b>");
-				   		$("#isa_error").slideDown();
-				   		$("#isa_error").show();
-				   		$("#isa_error").fadeOut(4500)
-				   }
-						
-				})
-	
-
-			    });
 		
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -414,10 +353,10 @@ $(document).ready(function()
 			
 		//Validation---------------->
 			
-			
+		alert("called")	;
 			$("#status").remove();
 
-				 $('#btsaveadmin').prop('disabled', true);
+				 $('#btsavendor').prop('disabled', true);
 			  	 $("#isa_success").fadeIn(2000);
 		    	 $("#isa_success").slideDown();
 				 $("#isa_success").show();
@@ -427,9 +366,9 @@ $(document).ready(function()
 		  	   var value="";
 				  
 				$.ajax({
-				url:"vdadd",
+				url:"vdadds",
 				type: "POST",
-				data: new FormData(document.getElementById("add_admin_form")),
+				data: new FormData(document.getElementById("add_admin_form_Vendoradd")),
 		        enctype: 'multipart/form-data',
 		        processData: false,
 		        contentType: false,
@@ -440,7 +379,7 @@ $(document).ready(function()
 					if(parseInt(n)>0)
 						{
 						
-						 $('#btsaveadmin').prop('disabled', false);
+						 $('#btsavendor').prop('disabled', false);
 					  	 $("#isa_success").fadeIn(3000);
 				    	 $("#isa_success").slideDown();
 						 $("#isa_success").show();
@@ -449,7 +388,7 @@ $(document).ready(function()
 						}
 					else
 						{
-				$('#btsaveadmin').prop('disabled', false)	;	
+				$('#btsavendor').prop('disabled', false)	;	
 				$("#isa_success").fadeOut();
 				$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Sorry try again  !!</b>");
 		   		$("#isa_error").slideDown();
@@ -459,7 +398,7 @@ $(document).ready(function()
 						}
 				},
 				   error: function() {
-					   $('#btsaveadmin').prop('disabled', false)	;	
+					   $('#btsavendor').prop('disabled', false)	;	
 					   $("#isa_success").fadeOut();
 						$("#isa_error").html("<b style=color:red;font-size:15px;font-family: Arial, Helvetica, sans-serif;>Something happens wrong !!</b>");
 				   		$("#isa_error").slideDown();

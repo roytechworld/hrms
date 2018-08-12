@@ -1,6 +1,7 @@
 package com.pts.procureline.controller;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pts.procureline.model.Admin;
 import com.pts.procureline.model.Vendor;
-import com.pts.procureline.model.VmsVendorMaster;
+
 import com.pts.procureline.service.AdminService;
 import com.pts.procureline.service.GenericService;
 import com.pts.procureline.service.VendorService;
@@ -41,9 +42,13 @@ public class VendorController {
 	
 	@Autowired
 	Vendor adminobj;
-
+	
 	@Autowired
 	AdminService adminservice;
+	
+	@Autowired
+	GenericService<Admin> admingenservice;
+	
 	
 	@Autowired
 	GenericService<Vendor>vendorservicegeneric;
@@ -89,7 +94,7 @@ public class VendorController {
 	}
 	@RequestMapping(value = "/vendorreport", method = RequestMethod.GET)
 	public ModelAndView vendorreport(@ModelAttribute Vendor vendor) {
-		
+		List<Vendor> vbindedlist=new ArrayList<Vendor>();
 		ModelAndView mav = new ModelAndView();
 		Session session=sessionFactory.openSession();
 		try
@@ -98,11 +103,21 @@ public class VendorController {
 		
 		for(Vendor h: vendorservicegeneric.getAnyDataGenericType(Vendor.class,session))
 		{
+		List<Admin> admindto=	admingenservice.retreiveAnydataWithonePARAUpdate
+		("adminID", h.getAdminId()+"", Admin.class, session);
+		
+		
+		System.out.println("Admin name found "+ admindto.get(0).getFirstName()+" "+admindto.get(0).getLastName());	
+		
+	
+		h.setAdminname(admindto.get(0).getFirstName()+" "+admindto.get(0).getLastName());
+		
+		vbindedlist.add(h);
 			
 		}
 		
 		
-		mav.addObject("vendorlist", vendorservicegeneric.getAnyDataGenericType(Vendor.class,session));
+		mav.addObject("vendorlist", vbindedlist);
 		}
 		catch(Exception e)
 		{
@@ -184,10 +199,11 @@ public class VendorController {
 	
 	
 	
-	@RequestMapping(value = "/vdadd", method = RequestMethod.POST)
+	@RequestMapping(value = "/vdadds", method = RequestMethod.POST)
 	public ModelAndView vdadds(@RequestParam("file") MultipartFile file ,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		Session session=sessionFactory.openSession();
+		Vendor adminobj=new Vendor();
 		try
 		{
 	    session.beginTransaction().begin();
@@ -206,7 +222,7 @@ public class VendorController {
 		adminobj.setContractFromDate(sqlTime);
 		adminobj.setNamePrefix("MR");
 		adminobj.setFederalTaxId("0");
-		adminobj.setCompanyId("0");
+		
 		adminobj.setCountry(0);
 		adminobj.setState(0);
 		adminobj.setCity(0);
@@ -251,10 +267,10 @@ public class VendorController {
 		adminobj.setRegVerification("0");
 		adminobj.setForgotPasswordOtp("");
 		adminobj.setIsDelete("0");
-		adminobj.setCompanyId("0");
+		adminobj.setCompanyId(request.getParameter("vendor_company_name"));
 		adminobj.setAdminId(Integer.parseInt(request.getParameter("adminrecord")));
 	
-		int i=	vendorservice.vendorDatasaveup(adminobj,session);
+		int i=	vendorservicegeneric.saveupdateAnyPojo(adminobj, session);
 		session.getTransaction().commit();
 		if(i>0)
 		{

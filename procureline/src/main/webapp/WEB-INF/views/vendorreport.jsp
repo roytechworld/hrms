@@ -76,7 +76,7 @@
                                                 <tr>
                                                 <td>${loop.index+1}</td>
                                                
-                                                <td>${propertylist.adminId}  </td>
+                                                <td>${propertylist.adminname}  </td>
                                                 <td>Not Available </td>
                                                 <td>${propertylist.firstName }
                                                  </td>
