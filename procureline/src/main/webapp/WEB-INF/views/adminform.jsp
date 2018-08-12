@@ -1,204 +1,174 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ include file = "include/header.jsp" %>
-<%@ include file = "include/sidemenu.jsp" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    pageEncoding="ISO-8859-1"%> 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<jsp:include page="./includeProcDesign/header.jsp"></jsp:include>
+<jsp:include page="./includeProcDesign/sidemenu.jsp"></jsp:include>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="<%=request.getContextPath() %>/resources/js/project.js"></script> 
-  <script src="<%=request.getContextPath() %>/resources/js/azaxload.js"></script> 
- 
+  <script src="<%=request.getContextPath() %>/resources/js/admin.js"></script> 
  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/projectCustom.css">
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-            Add Admin user
-                <small>Management</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Manage Admin user</a></li>
-                <li ><a href="<%=request.getContextPath()%>/adminreport/0"><i class="fa fa-dashboard"></i>Admin List</a></li>
-                <li class="active">Admin add</li>
-            </ol>
-        </section>
-        <!-- Content Header (Page header) -->
-        <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                               
-                               
-                                <p style="float: right;font-size: 11px;"><span style="color:red;">*</span>Required Fields</p>
-                            </h3>
-                        </div>
-
-
-                                                    
-                        <form id="add_admin_form" method="POST"  action="imageupload" enctype="multipart/form-data" siq_id="autopick_9675">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div style="margin-top:20px;" class="col-xs-12 col-sm-12 col-md-12">
-
-                                <div class="form-group has-feedback" id="status">
-                                             ${message }
-                  </div>
-                                        <table class="table table-bordered table-striped" width="100%" border="1" cellspacing="2" cellpadding="2">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="25%">
-                                                        <label for="email">Image</label>
-                                                    </td>
-                                                    <td width="25%">
-                                                        <input class="" type="file" name="file" accept="image/*" id="image-file">
-                                                        <span style="color: red;">(Max File Size : 2MB)</span>
-                                                    </td>
-                                                    <td width="25%"><label for="email">Prefix</label></td>
-                                                    <td width="25%">
-                                                        <input type="radio" id="name_prefix1" name="name_prefix" value="Mr." checked=""> Mr.
-                                                        <input type="radio" id="name_prefix2" name="name_prefix" value="Mrs."> Mrs.
-                                                        <input type="radio" id="name_prefix3" name="name_prefix" value="Ms."> Ms.
-                                                        <input type="radio" id="name_prefix4" name="name_prefix" value="Dr."> Dr.
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">First Name<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="fname" name="fname" placeholder="First Name" value="">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Last Name<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="lname" name="lname" placeholder="Last Name" value="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">Designation<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,custom[onlyLetterSp]]" type="text" id="admin_designation" name="admin_designation" placeholder="Designation" value="">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Company Name<span style="color: red;">*</span></label> 
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required]" type="text" id="admin_company_name" name="admin_company_name" placeholder="Company" value="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">Employee ID</label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control" type="text" id="admin_employee_id" name="admin_employee_id" placeholder="Employee ID" value="">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Email ID<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,custom[email]]" type="text" id="email" name="email" placeholder="Email ID" value="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">Password<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required]" type="password" id="password" name="password" placeholder="New Password">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Confirm Password<span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,equals[password]]" type="password" id="conf_password" name="conf_password" placeholder="Confirm New Password">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">Phone No. <span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[required,custom[phone],minSize[10],maxSize[10]]" type="text" id="phone" name="phone" placeholder="Phone No." onkeyup="enterNumber('phone')" value="">
-                                                    </td>
-                                                    <td>
-                                                        <label for="email">Fax No.</label>
-                                                    </td>
-                                                    <td>
-                                                        <input class="form-control validate[custom[onlyNumberSp]]" type="text" id="fax"  name="fax"  onkeyup="enterNumber('fax')" placeholder="Fax" value="">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="email">Address <span style="color: red;">*</span></label>
-                                                    </td>
-                                                    <td>
-                                                        <textarea name="address" id="address" class="form-control validate[required]" rows="5" cols="10" placeholder="Address" style="resize: none;"></textarea>
-                                                    </td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>Admin User Management</h2>
+            </div>
+        <form id="add_admin_form" method="POST"  action="imageupload" enctype="multipart/form-data" siq_id="autopick_9675">
+            <!-- table struture -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                         <div class="row">
+								<div class="col-md-12">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                           
+                                            <label class="form-label">Add Admin User</label>
+                                        </div>
                                     </div>
-                                </div>
+								</div>
                             </div>
-
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12"></div>
-            
-                                                   <div id="isa_success" class="isa_success">
-             
-    
-               </div>
-               <div id="isa_error" class="isa_error">
-
-
-              </div>
-                                    
-                                    
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                       
-                                       
-                                       
-                                        <button id="btsaveadmin" class="btn btn-success" type="button">Add admin</button>
-                                        
-                                  
-                                        
-                                        <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-default">Back</a>
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        <input type="hidden" name="sa_id" value="1">
+                            <div class="row">
+							 <div class="col-md-6">
+                                 Choose Prefix : &nbsp;
+                                <input type="radio" name="name_prefix" id="basic_checkbox_1"/>
+                                <label for="basic_checkbox_1">Mr.</label>
+                                <input type="radio" name="name_prefix" id="basic_checkbox_2"/>
+                                <label for="basic_checkbox_2">Mrs.</label>
+                                <input type="radio" name="name_prefix" id="basic_checkbox_3"/>
+                                <label for="basic_checkbox_3">Ms.</label>
+                                <input type="radio" name="name_prefix" id="basic_checkbox_4"/>
+                                <label for="basic_checkbox_4">Dr.</label>
+                             </div>
+							 <div class="col-md-6">
+                                <label class="form-label">Choose Your Image</label>
+                                <input type="file" name="file"></div>
+							</div>
+                            <div class="row">
+								<div class="col-md-6">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" id="fname" name="fname" class="form-control">
+                                            <label class="form-label">First Name*</label>
+                                        </div>
                                     </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input type="text" id="lname" name="lname" class="form-control">
+											<label class="form-label">Last Name*</label>
+										</div>
+									</div>
+								</div>
+                             </div>
+                             <div class="row">
+								<div class="col-md-6">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" id="admin_designation" name="admin_designation" class="form-control">
+                                            <label class="form-label">Designation*</label>
+                                        </div>
+                                    </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input type="text" id="admin_company_name" name="admin_company_name" class="form-control">
+											<label class="form-label">Company Name*</label>
+										</div>
+									</div>
+								</div>
+                             </div>
+                             <div class="row">
+								<div class="col-md-6">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" id="admin_employee_id" name="admin_employee_id" class="form-control">
+                                            <label class="form-label">Employee ID</label>
+                                        </div>
+                                    </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input type="text" type="text" id="email" name="email" class="form-control">
+											<label class="form-label">Email ID*</label>
+										</div>
+									</div>
+								</div>
+                             </div>
+                             <div class="row">
+								<div class="col-md-6">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="password" id="password" name="password" class="form-control">
+                                            <label class="form-label">Password*</label>
+                                        </div>
+                                    </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input type="password" id="conf_password" name="conf_password" class="form-control">
+											<label class="form-label">Confirm Password*</label>
+										</div>
+									</div>
+								</div>
+                             </div>
+                             <div class="row">
+								<div class="col-md-6">
+								  <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="text" id="phone" name="phone" onkeyup="enterNumber('phone')" class="form-control">
+                                            <label class="form-label">Phone No. </label>
+                                        </div>
+                                    </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input type="text" id="fax"  name="fax" onkeyup="enterNumber('fax')" class="form-control">
+											<label class="form-label">Fax No. </label>
+										</div>
+									</div>
+								</div>
+                             </div>
+                             <div class="row">
+								<div class="col-md-12">
+                                <div class="form-line">
+                                    <textarea rows="4" class="form-control no-resize" name="address" id="address" placeholder="Your Adress *"></textarea>
                                 </div>
+                             </div>
                             </div>
-                        </form>
-                    </div>
+                            
+                             <div class="row">
+							 <div class="col-md-12">
+                                     <div id="isa_success" class="isa_success"></div>
+                                     
+                                     <div id="isa_error" class="isa_error"> </div>
+                             </div>
+							</div>
+                            
+                             <div class="row">
+							 <div class="col-md-12">
+                                 <button id="btsaveadmin" class="btn btn-primary waves-effect" type="button">ADD</button>
+                                
+                                <a href="<%=request.getContextPath()%>/adminreport/0" class="btn btn-primary waves-effect" >Back</a>
+                                
+                                
+                             </div>
+							</div>
+                         </div>
                 </div>
             </div>
-                   
-                   
-                  
-                   
-                </section>
-                
-                      
+            <!-- #END# table struture -->
 
-                                        <!-- /.Left col -->
-            </div>
-            <!-- /.row (main row) -->
+        </div>
+        </form>
+</section>
 
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    
-    <%@ include file = "include/footer.jsp" %>
-    
- 
+<jsp:include page="./includeProcDesign/footer.jsp"></jsp:include>

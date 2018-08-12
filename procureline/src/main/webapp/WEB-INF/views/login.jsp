@@ -33,8 +33,9 @@
 						<div class="col-xs-6">
 							<div class="input-group">
 							<span class="input-group-addon">Sign As : </span>
-							<select id="type" class="form-control" >
+							<select id="type" class="form-control selectpicker" >
 							
+							<option value=""> </option>
 							<option value="superadmin">SAdmin</option>
                    <option value="admin">Admin</option>
                    <option value="vendor">Vendor</option>
@@ -44,6 +45,8 @@
 							
 				
 						  </div>
+						  
+						  
 							
 		             </div>
 					</div>

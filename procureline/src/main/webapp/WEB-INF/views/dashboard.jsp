@@ -1,250 +1,301 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ include file = "include/header.jsp" %>
-<%@ include file = "include/sidemenu.jsp" %>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<jsp:include page="<%=request.getContextPath() %>/includeProcDesign/header.jsp"></jsp:include>
+<jsp:include page="<%=request.getContextPath() %>/includeProcDesign/sidemenu.jsp"></jsp:include>
+<html>
 
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Dashboard
-                <small>Control panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                                <!-- small box -->
-                                <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h3>${admincount}</h3>
-
-                                        <p>Admin</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-stalker"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">View All <i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                                                <!-- ./col -->
-
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                                <!-- small box -->
-                                <div class="small-box bg-green">
-                                    <div class="inner">
-                                        <h3>${vendorcount}<sup style="font-size: 20px"></sup></h3>
-
-                                        <p>Vendor</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-ios-people"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">View All <i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                                                <!-- ./col -->
-
-                    
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                                <!-- small box -->
-                                <div class="small-box bg-yellow">
-                                    <div class="inner">
-                                        <h3>${consultantcount}</h3>
-
-                                        <p>Consultant</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-android-people"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">View All <i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                                                <!-- ./col -->
-
-                    
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                                <!-- small box -->
-                                <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h3>${employeecount}</h3>
-
-                                        <p>Employee</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-stalker"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">View All <i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                                                <!-- ./col -->
-
-                    
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
 
-                <section class="col-lg-12 connectedSortable">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Timesheet</h3>
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">playlist_add_check</i>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-bordered table-striped" style="font-size: 12px;" id="timesheet_tbl">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center;">Timesheet ID</th>
-                                        <th style="text-align: center;">Project Code</th>
-                                        <th style="text-align: center;">Project Name</th>
-                                        <th style="text-align: center;">Code</th>
-                                        <th style="text-align: center;">Name</th>
-                                        <th style="text-align: center;">Type</th>
-                                        <th style="text-align: center;">Start Date</th>
-                                        <th style="text-align: center;">End Date</th>
-                                        <th style="text-align: center;">ST</th>
-                                        <th style="text-align: center;">OT</th>
-                                        <th style="text-align: center;">Timesheet Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                
-                                
-                             
-                                
-                                <c:forEach var="stdentlistValue" varStatus="loop" items="${stlist}">
-                                
-                                                <tr>
-                                                <td><a href="#">${stdentlistValue.timesheetid}</a></td>
-                                                <td>${stdentlistValue.projectcode }</td>
-                                                <td>${stdentlistValue.projectname }  </td>
-                                                <td>${stdentlistValue.code } </td>
-                                                <td>${stdentlistValue.name } </td>
-                                                <td>${stdentlistValue.type }  </td>
-                                                <td>${stdentlistValue.startdate } </td>
-                                                <td>${stdentlistValue.enddate } </td>
-                                                <td>${stdentlistValue.st } </td>
-                                                <td>${stdentlistValue.ot } </td>
-                                                 
-                                                <td>
-                                                <span style="color: #f39c12;">Pending Approval</span>
-                                                 </td>
-                                            </tr>
-                                
-                                
-                                    </c:forEach>
-                                
-                                
-            
-                                
-                                
-                              </tbody>
-                            </table>
+                        <div class="content">
+                            <div class="text">Admin</div>
+                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
                         </div>
                     </div>
-                </section>
-                
-                        <section class="col-lg-12 connectedSortable">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Consultant's Invoice Summary</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body table-responsive no-padding">
-                                    <table id="van_tbl" class="table table-bordered table-striped table-responsive"
-                                           style="font-size: 11px;" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th width="1%">SL No.</th>
-                                                <th>Invoice ID</th>
-                                                <th>Timesheet ID</th>
-                                                <th>Consultant Name</th>
-                                                <th>Consultant Code</th>
-                                                <th>Consultant Designation</th>
-                                                <th>Point of Contact</th>
-                                                <th>Company Name</th>
-                                                <th>Admin Name</th>
-                                                <th>Payment Mode</th>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Rate</th>
-                                                <th>Pay</th>
-                                                <th>Invoice Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                                                                  
-                                                        
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="col-lg-12 connectedSortable">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Employee's Invoice Summary</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body table-responsive no-padding">
-                                    <table id="emp_tbl" class="table table-bordered table-striped table-responsive"
-                                           style="font-size: 11px;" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th width="1%">SL No.</th>
-                                                <th>Invoice ID</th>
-                                                <th>Timesheet ID</th>
-                                                <th>Employee Name</th>
-                                                <th>Employee Code</th>
-                                                <th>Employee Designation</th>
-                                                <th>Payment Mode</th>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th>Rate</th>
-                                                <th>Pay</th>
-                                                <th>Invoice Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                                                            
-                                                    
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
-
-                                        <!-- /.Left col -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">help</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Vendor</div>
+                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">forum</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Consultant</div>
+                            <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-orange hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">person_add</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Employee</div>
+                            <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.row (main row) -->
+            <!-- #END# Widgets -->
 
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    
-    <%@ include file = "include/footer.jsp" %>
-    
- 
+            <!-- Timesheet -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            Timesheet
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Timesheet ID</th>
+                                            <th>Project Code</th>
+                                            <th>Project Name</th>
+                                            <th>Codee</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>ST</th>
+                                            <th>OT</th>
+                                            <th>Timesheet Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                            <th>Timesheet ID</th>
+                                            <th>Project Code</th>
+                                            <th>Project Name</th>
+                                            <th>Codee</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>ST</th>
+                                            <th>OT</th>
+                                            <th>Timesheet Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>REC004002</td>
+                                            <td>REC004</td>
+                                            <td>PROCURELINE GRMS</td>
+                                            <td>TTC003</td>
+                                            <td>Urwashi Thakkar</td>
+                                            <td>Consultant</td>
+                                            <td>05-08-2018</td>
+                                            <td>05-09-2018</td>
+                                            <td>24.00</td>
+                                            <td>0.00r</td>
+                                            <td>Pending Approval</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Timesheet -->
+
+            <!-- Consultant's Invoice Summary -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            Consultant's Invoice Summary
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SL No.</th>
+                                            <th>Invoice ID</th>
+                                            <th>Timesheet ID</th>
+                                            <th>Consultant Name</th>
+                                            <th>Consultant Code</th>
+                                            <th>Consultant Designation</th>
+                                            <th>Point of Contact</th>
+                                            <th>Company Name</th>
+                                            <th>Admin Name</th>
+                                            <th>Payment Mode</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Rate</th>
+                                            <th>Pay</th>
+                                            <th>Invoice Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                            <th>SL No.</th>
+                                            <th>Invoice ID</th>
+                                            <th>Timesheet ID</th>
+                                            <th>Consultant Name</th>
+                                            <th>Consultant Code</th>
+                                            <th>Consultant Designation</th>
+                                            <th>Point of Contact</th>
+                                            <th>Company Name</th>
+                                            <th>Admin Name</th>
+                                            <th>Payment Mode</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Rate</th>
+                                            <th>Pay</th>
+                                            <th>Invoice Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Timesheet Not Approved</td>
+                                            <td>REC001001</td>
+                                            <td>GRMS EMPLOYEE</td>
+                                            <td>TCS001</td>
+                                            <td>Developer</td>
+                                            <td>Mr. Grms Vendor</td>
+                                            <td>TCS Test</td>
+                                            <td>Grms Admin</td>
+                                            <td>Net 45</td>
+                                            <td>01/01/2018 - 01/05/2018</td>
+                                            <td>
+                                                <div><b>Standard Time:</b><br/> 40.00 hours</div><br/>
+                                                <div><b>Over Time:</b><br/> 0.00 hours</div>
+                                            </td>
+                                            <td>
+                                                <div><b>Standard Rate:</b><br/> $ 40.00 </div><br/>
+                                                <div><b>Over Time Rate:</b><br/> $ 10.00 </div>
+                                            </td>
+                                            <td>
+                                                <div><b>Standard Pay:</b><br/>  $ 40.00 </div><br/>
+                                                <div><b>Over Pay:</b><br/> $ 10.00 </div>
+                                            </td>
+                                            <td>Pending Approval</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Consultant's Invoice Summary -->
+
+
+            <!-- Consultant's Invoice Summary -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                            Employee's Invoice Summary
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SL No.</th>
+                                            <th>Invoice ID</th>
+                                            <th>Timesheet ID</th>
+                                            <th>Employee Name</th>
+                                            <th>Employee Code</th>
+                                            <th>Employee Designation</th>
+                                            <th>Payment Mode</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Rate</th>
+                                            <th>Pay</th>
+                                            <th>Invoice Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                            <th>SL No.</th>
+                                            <th>Invoice ID</th>
+                                            <th>Timesheet ID</th>
+                                            <th>Employee Name</th>
+                                            <th>Employee Code</th>
+                                            <th>Employee Designation</th>
+                                            <th>Payment Mode</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Rate</th>
+                                            <th>Pay</th>
+                                            <th>Invoice Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>INV003</td>
+                                        <td>REC001001</td>
+                                        <td>Test EMPLOYEE</td>
+                                        <td>PES001</td>
+                                        <td>Developer</td>
+                                        <td>Net 45</td>
+                                        <td>01/01/2018 - 01/05/2018</td>
+                                        <td>
+                                            <div><b>Standard Time:</b><br/> 40.00 hours</div><br/>
+                                            <div><b>Over Time:</b><br/> 0.00 hours</div>
+                                        </td>
+                                        <td>
+                                            <div><b>Standard Rate:</b><br/> $ 40.00 </div><br/>
+                                            <div><b>Over Time Rate:</b><br/> $ 10.00 </div>
+                                        </td>
+                                        <td>
+                                            <div><b>Standard Pay:</b><br/>  $ 40.00 </div><br/>
+                                            <div><b>Over Pay:</b><br/> $ 10.00 </div>
+                                        </td>
+                                        <td>Invoice Approved</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Consultant's Invoice Summary -->
+
+
+           
+      
+
+        </div>
+    </section>
+
+<jsp:include page="<%=request.getContextPath() %>/includeProcDesign/footer.jsp"></jsp:include>

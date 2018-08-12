@@ -1,4 +1,4 @@
-/* Navbar ====================================== */
+﻿/* Navbar ====================================== */
 @import url(materialize.css);
 .navbar {
   font-family: "Roboto", sans-serif;
@@ -2991,7 +2991,7 @@ section.content {
     .card .header .col-xs-12 h2 {
       margin-top: 5px; }
   .card .body {
-    font-size: 14px;
+    font-size: 12px;
     color: #555;
     padding: 20px; }
     .card .body .col-xs-1,
@@ -7564,7 +7564,7 @@ fieldset[disabled] .form-control {
   .sidebar .menu {
     position: relative;
     overflow-y: auto;
-    height: 90vh; }
+    height: 69vh; }
     .sidebar .menu .list {
       list-style: none;
       padding-left: 0; }
@@ -7724,7 +7724,7 @@ fieldset[disabled] .form-control {
   background-size: cover;
   padding-left: 0;
   max-width: 360px;
-  margin: 0% auto;
+  margin: 2% auto;
   overflow-x: hidden; }
   .login-page .login-box .msg {
     color: #555;
@@ -7737,7 +7737,7 @@ fieldset[disabled] .form-control {
     text-decoration: none;
     color: #00BCD4; }
   .login-page .login-box .logo {
-    margin-bottom: 12px; }
+    margin-bottom: 20px; }
     .login-page .login-box .logo a {
       font-size: 36px;
       display: block;
